@@ -1,0 +1,93 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+.body{
+    width: 100vw;
+    height: 100vh;
+    border: 2px solid #7CA982;
+    background-image: url("../../../assets/background.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-position: left;
+}
+
+.login-area{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    padding: 2rem;
+    background-color: #7CA982;
+    box-shadow: 0 4px 12px rgba(36, 62, 54, 0.3);
+}
+
+.login-area h1{
+    color: #FFFFFF;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+.login-area p{
+    color: #FFFFFF;
+    font-weight: lighter;
+    font-size: 3rem;
+    font-style: italic;
+}
+
+
+.login-area form{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 25%;
+    
+}
+
+.login-area label{
+    color: #2f3e4680;
+    margin-bottom: 10px;
+}
+
+.login-area input{
+    padding: 0.6rem;
+    outline: none;
+    border: none;
+    margin-bottom: 16px;
+    border-radius: 3px;
+}
+
+
+.login-area .entryButton{
+    width: 35%;
+    padding: 0.6rem;
+    border: none;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #243E36;
+}
+
+.actions{
+    font-size: 10px;
+    margin-top: 5rem; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+}
+
+.actions p{
+    font-size: 15px;
+    font-style: normal;
+    color: #2f3e46dc;
+}
+
+.actions strong{
+    font-style: normal;
+    cursor: pointer;
+    color: #021f16;
+}

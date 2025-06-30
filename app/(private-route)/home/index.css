@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  padding: 1rem;
+}
+
+.burger-menu {
+  cursor: pointer;
+}
+
+.box-infos {
+  flex: 1;
+  margin-top: 1rem;
+}
+
+.boxes {
+  width: 75%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.5fr 2.5fr; /* Esquerda maior, direita menor */
+  gap: 3rem;
+  align-items: first baseline; /* Alinha o right-side ao topo dos left cards */
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infos-stock,
+.generateReports {
+  padding: 2rem;
+  border: 2px solid #7ca982;
+  border-radius: 8px;
+  color: #243e36;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.infos-stock h1,
+.generateReports h1 {
+  font-size: 28px;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.priority-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #db6161;
+  color: #f1f7ed;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.infos-stock p {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.about-stock {
+  background-color: #7ca982;
+  color: #243e36;
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.generateReports button {
+  width: 90%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  background-color: #7ca982;
+  border: none;
+  color: #243e36;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aboutInvoicing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #7ca982;
+  border-radius: 8px;
+  padding: 2rem;
+  color: #243e36;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.aboutInvoicing h1 {
+  font-size: 28px;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
+
+.dailyInvoicing,
+.dailySales {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #7ca982;
+  color: #243e36;
+  padding: 1rem;
+  border-radius: 4px;
+  width: 95%;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.dailySales:hover,
+.dailyInvoicing:hover,
+.generateReports button:hover,
+.about-stock:hover{
+    transition: 0.4s;
+    background-color: #2a4940;
+    color: #ffffff;
+}
+
+
+.priority-info:hover{
+    background-color: #c43131;
+    transition: 0.4s;
+}
+
+.dailyInvoicing .infos,
+.dailySales .infos {
+  display: flex;
+  flex-direction: column;
+}
+
+.dailyInvoicing h3,
+.dailySales h3 {
+  margin-bottom: 0.5rem;
+}
+
+.action {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  padding: 1rem;
+  background-color: transparent;
+}
+
+.logoutBtn {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  background-color: #243e36;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.logoutBtn:hover{
+    background-color: #111d18;
+    transition: 0.4s;
+}
