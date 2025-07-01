@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    width: 100vw;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box-infos {
+    flex: 1;
+    margin-top: 3rem;
+}
+
+.boxes {
+    width: 75%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr;
+    gap: 3rem;
+    align-items: first baseline;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.most-sales,
+.about-invoicing,
+.less-sold {
+    padding: 2rem;
+    border: 2px solid #7ca982;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+
+.most-sales .about-sales{
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+
+.about-sales div{
+    gap: 1rem;
+    font-size: 30px;
+    width: 100%;
+    font-weight: bold;
+    color: #7CA982;
+    text-align: center;
+}
+
+
+.most-sales button{
+    display: flex;
+    background-color: #7CA982;
+    color: #243E36;
+    border: none;
+    width: 50%;
+    font-size: 20px;
+    justify-content: space-evenly;
+    font-weight: bold;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    cursor: pointer;
+}
+
+.about-invoicing {
+    justify-content: space-evenly;
+    gap: 1rem;
+
+    & h2{
+        font-size: 16px;
+    }
+
+    & h1{
+        font-size: 36px;
+        font-weight: bold;
+    }
+}
+
+.about-invoicing strong{
+    color: #7CA982;
+}
+
+.go-to-list {
+    display: flex;
+    cursor: pointer;
+    width: 25vw;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #7CA982;
+    font-size: 20px;
+    font-weight: bold;
+    color: #243E36;
+    border: none;
+    padding: 1rem;
+}
+
+
+.go-to-list:hover {
+    background-color: #243E36;
+    color: #ffffff;
+    transition: 0.4s;
+}
+
+.most-sales div,
+.about-invoicing div,
+.less-sold div {
+    display: flex;
+    align-items: first baseline;
+    gap: 1rem;
+}
+
+.most-sales h2,
+.about-invoicing h2,
+.less-sold h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 34px;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    color: #243E36;
+}
+
+.less-sold h2 {
+    color: #DB6161;
+}
+
+
+
+.less-sold {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 2px solid #DB6161;
+    color: #DB6161;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.less-sold h1 {
+    color: #C53333;
+}
+
+.footer {
+    display: flex;
+    padding: 1rem;
+    background-color: transparent;
+}
+
+.logoutBtn {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background-color: #243e36;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.logoutBtn:hover {
+    background-color: #111d18;
+    transition: 0.4s;
+}

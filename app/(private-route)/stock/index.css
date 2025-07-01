@@ -14,40 +14,9 @@
   justify-content: space-between;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
-header div{
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-}
-
-.header h1{
-  font-size: 2rem;
-  margin-left: 2rem;
-  color: #243e36af;
-}
-
-header input{
-  width: 35vw;
-  border: 2px solid #7ca982;
-  padding: 10px;
-  border-radius: 12px;
-  outline: none;
-}
-
-.burger-menu {
-  cursor: pointer;
-}
-
 .box-infos {
   flex: 1;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .boxes {
@@ -71,10 +40,13 @@ header input{
   padding: 2rem;
   border: 2px solid #7ca982;
   border-radius: 4px;
-  color: #243e36;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+}
+
+.generalOverview{
+  height: 160px;
 }
 
 .infos-stock span,
@@ -86,11 +58,11 @@ header input{
 .go-to-list{
   display: flex;
   cursor: pointer;
-  width: 400px;
+  width: 25vw;
   align-items: center;
   justify-content: space-between;
   background-color: #7CA982;
-  font-size: 1rem;
+  font-size: 20px;
   font-weight: bold;
   color: #243E36;
   border: none;
@@ -116,7 +88,9 @@ header input{
 .infos-stock h1,
 .generalOverview h1,
 .lowStockInfos h1 {
-  font-size: 46px;
+  color: #111d18;
+  font-weight: bold;
+  font-size: 48px;
   margin-bottom: 1rem;
   text-align: left;
 }
@@ -124,6 +98,9 @@ header input{
 .infos-stock h3,
 .generalOverview h3,
 .lowStockInfos h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: lighter;
   margin-bottom: 0.5rem;
   text-align: left;
   color: #243E36;
@@ -141,8 +118,6 @@ header input{
 .lowStockInfos {
   display: flex;
   flex-direction: column;
-  border: 2px solid #7ca982;
-  border-radius: 8px;
   padding: 2rem;
   border: 2px solid #DB6161;
   color: #DB6161;

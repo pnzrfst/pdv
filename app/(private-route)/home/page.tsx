@@ -5,7 +5,7 @@ import { IoMdMenu } from "react-icons/io";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 
 import "./index.css";
-import LateralMenu from "@/components/lateralMenu/page";
+import LateralMenu from "@/components/LateralMenu";
 import { useState } from "react";
 
 export default function Home() {
@@ -67,7 +67,6 @@ export default function Home() {
                 <FaArrowRight size={30} color="#FFFFFF" />
               </span>
             </span>
-            <span>Texto 4</span>
           </div>
         </div>
       </section>
