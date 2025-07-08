@@ -32,9 +32,9 @@
   width: 75%;
   margin: auto;
   display: grid;
-  grid-template-columns: 1.5fr 2.5fr; /* Esquerda maior, direita menor */
+  grid-template-columns: 1.5fr 2.5fr; 
   gap: 3rem;
-  align-items: first baseline; /* Alinha o right-side ao topo dos left cards */
+  align-items: first baseline;
 }
 
 .left-side {
@@ -89,6 +89,7 @@
   padding: 1rem;
   border-radius: 4px;
   text-align: left;
+  cursor: pointer;
 }
 
 .generateReports button {
@@ -141,21 +142,18 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .dailySales:hover,
 .dailyInvoicing:hover,
 .generateReports button:hover,
-.about-stock:hover{
-    transition: 0.4s;
-    background-color: #2a4940;
-    color: #ffffff;
+.about-stock:hover {
+  transition: 0.4s;
+  background-color: #2a4940;
+  color: #ffffff;
 }
 
-
-.priority-info:hover{
-    background-color: #c43131;
-    transition: 0.4s;
+.priority-info:hover {
+  background-color: #c43131;
+  transition: 0.4s;
 }
 
 .dailyInvoicing .infos,
@@ -193,7 +191,7 @@
   font-size: 16px;
 }
 
-.logoutBtn:hover{
-    background-color: #111d18;
-    transition: 0.4s;
+.logoutBtn:hover {
+  background-color: #111d18;
+  transition: 0.4s;
 }
