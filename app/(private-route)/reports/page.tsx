@@ -18,7 +18,7 @@ export default function Reports() {
                 <p><FaCartShopping style={{ marginRight: '8px' }} size={24} color="#7CA982"/>120</p>
             </li>
             <li className="box">
-                <h5>Total de ganhos</h5> 
+                <h5>Total de faturamento (hoje)</h5> 
                 <p><FaDollarSign style={{ marginRight: '8px' }} size={24} color="#7CA982"/>R$ 20,00</p>
             </li>
             <li className="box">

@@ -8,7 +8,7 @@ import HeaderAndSearch from "@/components/HeaderAndSearch";
 
 
 
-export default function Home() {
+export default function Stock() {
 
 
   return (
