@@ -1,0 +1,70 @@
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.header h2 {
+  font-weight: bold;
+}
+.header p {
+  font-weight: lighter;
+}
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.topBoxes {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.boxes {
+  list-style: none;
+  justify-content: space-around;
+  display: flex;
+}
+
+.boxes .headerBox {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.boxes .aboutTopBox {
+  background-color: #ffffff;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  border-radius: 4px;
+  padding: 3rem;
+}
+
+.mainBoxes {
+  display: flex;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.mainBoxesCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-flow: row;
+  list-style: none;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.mainBoxesCards .aboutMainBox {
+  background-color: #ffffff;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+}
