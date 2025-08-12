@@ -51,7 +51,7 @@ export default function Stock() {
         <section className={styles.addToInventory}>
           <div className={styles.addProductContainer}>
             <div className={styles.info}>
-              <h4 className={styles.h4}>Adicionar ao estoque: </h4>
+              <h3 className={styles.h4}>Adicionar ao estoque: </h3>
               <p className={styles.subtitle}>Adicione produtos ao estoque</p>
             </div>
             <button className={styles.addNewProduct}>Adicionar</button>
