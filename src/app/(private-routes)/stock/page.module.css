@@ -1,3 +1,8 @@
+.svg {
+  fill: #f7f7f7;
+  stroke: #f7f7f7;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -39,12 +44,13 @@
 
 .headerBox .h4 {
   font-size: 18px;
+  color: #f7f7f7;
   font-weight: lighter;
 }
 
 .boxes .aboutTopBox {
   align-items: first baseline;
-  background-color: #ffffff;
+  background: linear-gradient(#778da9, #91abce);
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   border-radius: 4px;
   padding: 3rem;
@@ -55,16 +61,23 @@
 .h4,
 .p {
   align-items: flex-start;
+  color: #f7f7f7;
 }
 
 .boxes .aboutTopBox .h1 {
   font-size: 32px;
+  font-weight: bolder;
   margin-bottom: 12px;
 }
 
-.subtitle {
+.titleAddToInventory{
+  color: #0D1B2A;
+  font-weight: bolder;
+}
+
+.pAddToInventory {
   text-align: justify;
-  color: #2725257c;
+  color: #0D1B2A;
   align-items: first baseline;
 }
 
@@ -85,15 +98,15 @@
 .addToInventory .addNewProduct {
   border-radius: 4px;
   border: none;
-  color: #ffffff;
+  color: #f7f7f7;
   cursor: pointer;
   padding: 12px;
-  background: linear-gradient(#14add6, #384295);
+  background: linear-gradient(#415A77, #2352a8);
   width: 15%;
 }
 
 .addNewProduct:hover {
-  background: linear-gradient(#0f7896, #202658);
+  background: linear-gradient(#415A77, #1B263B);
 }
 
 /*--------------------------------------------------------------------------------------*/

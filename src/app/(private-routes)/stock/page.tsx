@@ -16,17 +16,17 @@ export default function Stock() {
               <h1 className={styles.h1}>10</h1>
               <div className={styles.headerBox}>
                 <h4 className={styles.h4}>Categorias</h4>
-                <FaListOl size={25} />
+                <FaListOl className={styles.svg} size={25} />
               </div>
-              <p className={styles.subtitle}>Todas as categorias</p>
+              <p className={styles.p}>Todas as categorias</p>
             </li>
             <li className={styles.aboutTopBox}>
               <h1 className={styles.h1}>210</h1>
               <div className={styles.headerBox}>
                 <h4 className={styles.h4}>Qtd de produtos</h4>
-                <FaListOl size={25} />
+                <FaListOl className={styles.svg}  size={25} />
               </div>
-              <p className={styles.subtitle}>
+              <p className={styles.p}>
                 Quantidade de produtos em estoque
               </p>
             </li>
@@ -34,25 +34,25 @@ export default function Stock() {
               <h1 className={styles.h1}>310</h1>
               <div className={styles.headerBox}>
                 <h4 className={styles.h4}>Valor do estoque</h4>
-                <FaListOl size={25} />
+                <FaListOl className={styles.svg}  size={25} />
               </div>
-              <p className={styles.subtitle}>Valor do estoque</p>
+              <p className={styles.p}>Valor do estoque</p>
             </li>
             <li className={styles.aboutTopBox}>
               <h1 className={styles.h1}>410</h1>
               <div className={styles.headerBox}>
                 <h4 className={styles.h4}>Fornecedores</h4>
-                <FaListOl size={25} />
+                <FaListOl className={styles.svg}  size={25} />
               </div>
-              <p className={styles.subtitle}>Quantidade de fornecedores</p>
+              <p className={styles.p}>Quantidade de fornecedores</p>
             </li>
           </ul>
         </section>
         <section className={styles.addToInventory}>
           <div className={styles.addProductContainer}>
             <div className={styles.info}>
-              <h3 className={styles.h4}>Adicionar ao estoque: </h3>
-              <p className={styles.subtitle}>Adicione produtos ao estoque</p>
+              <h3 className={styles.titleAddToInventory}>Adicionar ao estoque: </h3>
+              <p className={styles.pAddToInventory}>Adicione produtos ao estoque</p>
             </div>
             <button className={styles.addNewProduct}>Adicionar</button>
           </div>

@@ -1,3 +1,8 @@
+.svg {
+  fill: #f7f7f7;
+  stroke: #f7f7f7;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -39,14 +44,10 @@
   margin-bottom: 12px;
 }
 
-.headerBox .h4 {
-  font-size: 18px;
-  font-weight: lighter;
-}
 
 .boxes .aboutTopBox {
   align-items: first baseline;
-  background-color: #ffffff;
+  background: linear-gradient(#8ea7c9, #91abce);
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   border-radius: 4px;
   padding: 3rem;
@@ -57,16 +58,18 @@
 .h4,
 .p {
   align-items: flex-start;
+  color: #f7f7f7;
 }
 
 .boxes .aboutTopBox .h1 {
-  font-size: 32px;
+  font-size: 36px;
+  font-weight: bolder;
   margin-bottom: 12px;
 }
 
 .subtitle {
   text-align: justify;
-  color: #2725257c;
+  color: #f7f7f7;
   align-items: first baseline;
 }
 
@@ -84,18 +87,22 @@
   padding: 1rem;
 }
 
+.recordNewSale h3, .salesP{
+  color: #0D1B2A;
+  align-items: first baseline;
+} 
 .recordNewSale .addNewSale {
   border-radius: 4px;
   border: none;
-  color: #ffffff;
+  color: #f7f7f7;
   cursor: pointer;
   padding: 12px;
-  background: linear-gradient(#14add6, #384295);
+  background: linear-gradient(#415A77, #2352a8);
   width: 15%;
 }
 
 .addNewSale:hover {
-  background: linear-gradient(#0f7896, #202658);
+  background: linear-gradient(#415A77, #1B263B);
 }
 
 /*--------------------------------------------------------------*/
@@ -112,15 +119,15 @@
 }
 
 .graphsContainer .graph span {
-  background-color: #ffffff;
+  background: linear-gradient(#8ea7c9, #91abce);
   text-align: center;
+  color: #f7f7f7;
   padding: 5rem;
   width: 50%;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
-.listStock{
+.listStock {
   margin: 1rem;
   padding: 1rem;
 }
-
