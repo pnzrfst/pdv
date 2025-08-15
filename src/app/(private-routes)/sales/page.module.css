@@ -47,7 +47,7 @@
 
 .boxes .aboutTopBox {
   align-items: first baseline;
-  background: linear-gradient(#8ea7c9, #91abce);
+  background: linear-gradient(#778da9, #91abce);
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   border-radius: 4px;
   padding: 3rem;
@@ -59,6 +59,7 @@
 .p {
   align-items: flex-start;
   color: #f7f7f7;
+  animation: slideFromRight 0.4s ease-out;
 }
 
 .boxes .aboutTopBox .h1 {
@@ -119,7 +120,7 @@
 }
 
 .graphsContainer .graph span {
-  background: linear-gradient(#8ea7c9, #91abce);
+  background: linear-gradient(#778da9, #91abce);
   text-align: center;
   color: #f7f7f7;
   padding: 5rem;
@@ -127,7 +128,17 @@
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
-.listStock {
+.listSales {
   margin: 1rem;
   padding: 1rem;
+}
+
+
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(40%); /*começa fora, na direita */
+  }
+  100% {
+    transform: translateX(0); /*termina na posição original*/
+  }
 }

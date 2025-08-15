@@ -58,7 +58,7 @@ export default function Sales() {
             <span>Gráfico aqui</span>
           </div>
         </section>
-        <section className={styles.listStock}>
+        <section className={styles.listSales}>
             <TableComponent></TableComponent>
         </section>
       </main>
