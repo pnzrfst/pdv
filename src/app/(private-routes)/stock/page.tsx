@@ -13,35 +13,35 @@ export default function Stock() {
         <section className={styles.topBoxes}>
           <ul className={styles.boxes}>
             <li className={styles.aboutTopBox}>
-              <h1 className={styles.h1}>10</h1>
+              <h4 className={styles.h4}>Categorias:</h4>
               <div className={styles.headerBox}>
-                <h4 className={styles.h4}>Categorias</h4>
+                <h1 className={styles.h1}>10</h1>
                 <FaListOl className={styles.svg} size={25} />
               </div>
-              <p className={styles.p}>Todas as categorias</p>
+              <p className={styles.p}>Todas as categorias.</p>
             </li>
             <li className={styles.aboutTopBox}>
-              <h1 className={styles.h1}>210</h1>
+              <h4 className={styles.h4}>Quantidade de produtos:</h4>
               <div className={styles.headerBox}>
-                <h4 className={styles.h4}>Qtd de produtos</h4>
+                <h1 className={styles.h1}>210</h1>
                 <FaListOl className={styles.svg}  size={25} />
               </div>
               <p className={styles.p}>
-                Quantidade de produtos em estoque
+                Quantidade de produtos.
               </p>
             </li>
             <li className={styles.aboutTopBox}>
-              <h1 className={styles.h1}>310</h1>
+              <h4 className={styles.h4}>Valor do estoque</h4>
               <div className={styles.headerBox}>
-                <h4 className={styles.h4}>Valor do estoque</h4>
+                <h1 className={styles.h1}>R$ 310,00</h1>
                 <FaListOl className={styles.svg}  size={25} />
               </div>
               <p className={styles.p}>Valor do estoque</p>
             </li>
             <li className={styles.aboutTopBox}>
-              <h1 className={styles.h1}>410</h1>
+              <h4 className={styles.h4}>Fornecedores</h4>
               <div className={styles.headerBox}>
-                <h4 className={styles.h4}>Fornecedores</h4>
+                <h1 className={styles.h1}>200</h1>
                 <FaListOl className={styles.svg}  size={25} />
               </div>
               <p className={styles.p}>Quantidade de fornecedores</p>

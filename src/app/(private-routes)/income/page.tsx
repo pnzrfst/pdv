@@ -19,7 +19,7 @@ export default function Income() {
           <li className={styles.infosBox}>
             <div className={styles.upSection}>
               <h3>Entradas:</h3>
-              <p>R$ 12.000,00</p>
+              <h2>R$ 12.000,00</h2>
             </div>
             <div className={styles.bottomSection}>
               <p className={styles.subtitleBottomSection}>
@@ -30,7 +30,7 @@ export default function Income() {
           <li className={styles.infosBox}>
             <div className={styles.upSection}>
               <h3>Entradas:</h3>
-              <p>R$ 12.000,00</p>
+              <h2>R$ 12.000,00</h2>
             </div>
             <div className={styles.bottomSection}>
               <p className={styles.subtitleBottomSection}>
@@ -41,7 +41,7 @@ export default function Income() {
           <li className={styles.infosBox}>
             <div className={styles.upSection}>
               <h3>Entradas:</h3>
-              <p>R$ 12.000,00</p>
+              <h2>R$ 12.000,00</h2>
             </div>
             <div className={styles.bottomSection}>
               <p className={styles.subtitleBottomSection}>

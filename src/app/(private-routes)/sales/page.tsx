@@ -25,10 +25,10 @@ export default function Sales() {
           <li className={styles.aboutTopBox}>
             <h1 className={styles.h1}>210</h1>
             <div className={styles.headerBox}>
-              <h4 className={styles.h4}>Qtd de vendas</h4>
+              <h4 className={styles.h4}>Quantidade de vendas</h4>
               <FaListOl className={styles.svg} size={25}/>
             </div>
-            <p className={styles.subtitle}>Quantidade de vendas</p>
+            <p className={styles.subtitle}>Quantidade de vendas registradas</p>
           </li>
           <li className={styles.aboutTopBox}>
             <h1 className={styles.h1}>R$ 250,00</h1>

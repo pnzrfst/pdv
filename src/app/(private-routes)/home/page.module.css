@@ -1,4 +1,17 @@
 
+:root {
+  --primary-color: #1F2937;
+  --secondary-color: #4B5563;
+  --accent-color: #3B82F6;
+  --bg-color: #F9FAFB;
+  --box-bg: #FFFFFF;
+  --text-dark: #111827;
+  --text-light: #6B7280;
+  --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  --radius: 6px;
+  --transition: 0.3s ease-in-out;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -6,11 +19,14 @@
 }
 
 .header h2 {
-  font-weight: bold;
+  font-weight: 700;
 }
+
 .header p {
   font-weight: lighter;
 }
+
+
 .mainContent {
   flex: 1;
   display: flex;
@@ -37,8 +53,8 @@
 }
 
 .boxes .aboutTopBox {
-  background-color: #ffffff;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  background-color: var(--box-bg);
+  box-shadow: var(--shadow);
   border-radius: 4px;
   padding: 3rem;
 }
@@ -62,8 +78,8 @@
 }
 
 .mainBoxesCards .aboutMainBox {
-  background-color: #ffffff;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  background-color: var(--box-bg);
+  box-shadow: var(--shadow);
   border-radius: 12px;
   padding: 2rem;
   display: flex;

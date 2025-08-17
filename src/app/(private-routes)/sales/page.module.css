@@ -1,8 +1,23 @@
-.svg {
-  fill: #f7f7f7;
-  stroke: #f7f7f7;
+:root {
+  --primary-color: #1F2937;
+  --secondary-color: #4B5563;
+  --accent-color: #3B82F6;
+  --bg-color: #F9FAFB;
+  --box-bg: #FFFFFF;
+  --text-dark: #111827;
+  --text-light: #6B7280;
+  --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  --radius: 6px;
+  --transition: 0.3s ease-in-out;
 }
 
+/* ---------------------------- SVG ---------------------------- */
+.svg {
+  fill: var(--text-dark);
+  stroke: var(--text-dark);
+}
+
+/* ---------------------------- HEADER ---------------------------- */
 .header {
   display: flex;
   flex-direction: column;
@@ -10,14 +25,19 @@
 }
 
 .header h2 {
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
 }
+
 .header p {
-  font-weight: lighter;
+  font-weight: 300;
+  color: var(--text-light);
+  font-size: 1rem;
 }
 
-/*----------------------------------------------------------------*/
-
+/* ---------------------------- MAIN CONTENT ---------------------------- */
 .mainContent {
   flex: 1;
   display: flex;
@@ -25,15 +45,17 @@
   overflow-y: auto;
 }
 
+/* ---------------------------- TOP BOXES ---------------------------- */
 .topBoxes {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin: 2rem 1rem 1rem 1rem;
 }
 
 .boxes {
   list-style: none;
-  justify-content: space-around;
   display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
 }
 
 .boxes .headerBox {
@@ -41,104 +63,129 @@
   gap: 2rem;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
-
 
 .boxes .aboutTopBox {
-  align-items: first baseline;
-  background: linear-gradient(#778da9, #91abce);
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  border-radius: 4px;
-  padding: 3rem;
+  flex: 1;
+  min-width: 300px;
+  background-color: var(--box-bg);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 2rem;
 }
 
-.aboutTopBox .h1,
-.headerBox,
-.h4,
-.p {
-  align-items: flex-start;
-  color: #f7f7f7;
+.aboutTopBox .h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.35rem;
   animation: slideFromRight 0.4s ease-out;
 }
 
-.boxes .aboutTopBox .h1 {
-  font-size: 36px;
-  font-weight: bolder;
-  margin-bottom: 12px;
+.headerBox,
+.h4,
+.p {
+  color: var(--text-light);
+  animation: slideFromRight 0.4s ease-out;
 }
 
 .subtitle {
   text-align: justify;
-  color: #f7f7f7;
-  align-items: first baseline;
+  color: var(--text-dark);
+  font-size: 0.9rem;
 }
 
-/*-----------------------------------------------------------------------*/
-
+/* ---------------------------- RECORD NEW SALE ---------------------------- */
 .recordNewSale {
-  padding: 1rem;
-  margin: 1rem;
+  padding: 1rem 2rem;
+  margin: 2rem 1rem;
+  border-radius: var(--radius);
+
 }
 
-.recordNewSale .recordNewSaleContainer {
+.recordNewSaleContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  flex-wrap: wrap;
 }
 
-.recordNewSale h3, .salesP{
-  color: #0D1B2A;
-  align-items: first baseline;
-} 
-.recordNewSale .addNewSale {
-  border-radius: 4px;
+.recordNewSale h3{
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.recordNewSale .salesP{
+  font-weight: 300;
+  color: var(--text-light);
+}
+
+.addNewSale {
+  border-radius: var(--radius);
   border: none;
-  color: #f7f7f7;
+  color: var(--box-bg);
   cursor: pointer;
-  padding: 12px;
-  background: linear-gradient(#415A77, #2352a8);
-  width: 15%;
+  padding: 0.85rem 1.50rem;
+  background-color: var(--primary-color);
+  width: fit-content;
+  transition: var(--transition);
 }
 
 .addNewSale:hover {
-  background: linear-gradient(#415A77, #1B263B);
+  background-color: var(--secondary-color);
 }
 
-/*--------------------------------------------------------------*/
-
+/* ---------------------------- GRAPHS ---------------------------- */
 .graphsContainer {
   margin: 1rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .graphsContainer .graph {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .graphsContainer .graph span {
-  background: linear-gradient(#778da9, #91abce);
+  flex: 1;
+  min-width: 300px;
+  background: linear-gradient(135deg, #3B82F6, #60A5FA);
   text-align: center;
-  color: #f7f7f7;
-  padding: 5rem;
-  width: 50%;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  color: #fff;
+  padding: 4rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+  font-size: 1.25rem;
+  transition: var(--transition);
 }
 
+.graphsContainer .graph span:hover {
+  transform: translateY(-4px);
+}
+
+/* ---------------------------- SALES LIST ---------------------------- */
 .listSales {
-  margin: 1rem;
-  padding: 1rem;
+  margin: 2rem 1rem;
+  padding: 1rem 2rem;
+  background-color: var(--box-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
-
+/* ---------------------------- ANIMATIONS ---------------------------- */
 @keyframes slideFromRight {
   0% {
-    transform: translateX(40%); /*começa fora, na direita */
+    transform: translateX(40%);
+    opacity: 0;
   }
   100% {
-    transform: translateX(0); /*termina na posição original*/
+    transform: translateX(0);
+    opacity: 1;
   }
 }
