@@ -31,6 +31,7 @@ export default function FormComponent({
             required
             label="Nome do produto"
             id="name"
+            value={""}
             variant="outlined"
           />
           <TextField
@@ -39,16 +40,19 @@ export default function FormComponent({
             label="Categoria"
             id="category"
             variant="outlined"
+            value={""}
           />
           <TextField
             type="number"
             required
             label="Quantidade"
             id="quantity"
+            value={""}
             variant="outlined"
           />
           <TextField
             type="number"
+            value={""}
             required
             label="Preço (un)"
             id="price"
@@ -56,6 +60,7 @@ export default function FormComponent({
           />
           <TextField
             type="text"
+            value={""}
             label="Descrição: "
             id="description"
             variant="outlined"

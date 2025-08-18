@@ -1,9 +1,18 @@
+"use client"
 import TableComponent from "@/components/TableComponent";
 import styles from "./page.module.css";
 import { MdPointOfSale } from "react-icons/md";
 import { FaListOl } from "react-icons/fa6";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
+import {useState } from "react";
+
+import SalesFormComponent from "@/components/SalesFormComponent";
+
+
 export default function Sales() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [payment, setPayment] = useState("")
+
   return (
     <div>
       <header className={styles.header}>
@@ -16,7 +25,7 @@ export default function Sales() {
             <h1 className={styles.h1}>R$ 1200,00</h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Ganhos no dia de hoje</h4>
-              <FaMoneyBillTrendUp className={styles.svg} size={25}/>
+              <FaMoneyBillTrendUp className={styles.svg} size={25} />
             </div>
             <p className={styles.subtitle}>
               Total ganho pelas vendas no dia de hoje
@@ -26,7 +35,7 @@ export default function Sales() {
             <h1 className={styles.h1}>210</h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Quantidade de vendas</h4>
-              <FaListOl className={styles.svg} size={25}/>
+              <FaListOl className={styles.svg} size={25} />
             </div>
             <p className={styles.subtitle}>Quantidade de vendas registradas</p>
           </li>
@@ -49,7 +58,23 @@ export default function Sales() {
               <h3 className={styles.h3}>Registrar venda: </h3>
               <p className={styles.salesP}>Registre suas vendas</p>
             </div>
-            <button className={styles.addNewSale}>Registrar</button>
+            <button
+              className={styles.addNewSale}
+              onClick={() => setIsOpen(true)}
+            >
+              Registrar
+            </button>
+            <SalesFormComponent 
+              title="Registrar vendas:"
+              subtitle="Insira as informações e registre uma venda."
+              onSubmit={() => console.log("Foi-se embora")}
+              isOpen={isOpen}
+              setPayment={setPayment}
+              onCancel={() => {
+                setIsOpen(!isOpen)
+                setPayment("")
+              }}
+            ></SalesFormComponent>
           </div>
         </section>
         <section className={styles.graphsContainer}>
@@ -59,7 +84,7 @@ export default function Sales() {
           </div>
         </section>
         <section className={styles.listSales}>
-            <TableComponent></TableComponent>
+          <TableComponent></TableComponent>
         </section>
       </main>
     </div>

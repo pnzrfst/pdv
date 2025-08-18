@@ -1,4 +1,9 @@
+"use client"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import styles from "./page.module.css";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
 
 export default function Income() {
   return (
@@ -10,7 +15,11 @@ export default function Income() {
             <p>R$ 2.300,00</p>
           </div>
           <aside className={styles.filter}>
-            <div className={styles.filterContainer}></div>
+            <div className={styles.filterContainer}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker />
+              </LocalizationProvider>
+            </div>
           </aside>
         </div>
       </header>

@@ -2,7 +2,7 @@
 import TableComponent from "@/components/TableComponent";
 import styles from "./page.module.css";
 import { FaListOl } from "react-icons/fa6";
-import FormComponent from "@/components/FormComponent";
+import FormComponent from "@/components/StockFormComponent";
 import { useState } from "react";
 
 export default function Stock() {
