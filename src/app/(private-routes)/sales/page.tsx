@@ -11,7 +11,8 @@ import SalesFormComponent from "@/components/SalesFormComponent";
 
 export default function Sales() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [payment, setPayment] = useState("")
+  const [payment, setPayment] = useState<string>("")
+  const [product, setProduct] = useState<string>("")
 
   return (
     <div>
@@ -69,10 +70,14 @@ export default function Sales() {
               subtitle="Insira as informações e registre uma venda."
               onSubmit={() => console.log("Foi-se embora")}
               isOpen={isOpen}
+              payment={payment}
               setPayment={setPayment}
+              setProduct={setProduct}
+              product={product}
               onCancel={() => {
                 setIsOpen(!isOpen)
-                setPayment("")
+                setPayment("");
+                setProduct("");
               }}
             ></SalesFormComponent>
           </div>

@@ -2,8 +2,8 @@
 import TableComponent from "@/components/TableComponent";
 import styles from "./page.module.css";
 import { FaListOl } from "react-icons/fa6";
-import FormComponent from "@/components/StockFormComponent";
 import { useState } from "react";
+import StockFormComponent from "@/components/StockFormComponent";
 
 export default function Stock() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -68,13 +68,13 @@ export default function Stock() {
               Adicionar
             </button>
 
-            <FormComponent
+            <StockFormComponent
               title="Cadastrar produto:"
               subtitle="Insira as informações e cadastre um produto."
               onSubmit={() => console.log("Foi-se embora")}
               isOpen={isOpen}
               onCancel={() => setIsOpen(!isOpen)}
-            ></FormComponent>
+            ></StockFormComponent>
           </div>
         </section>
         <section className={styles.listStock}>

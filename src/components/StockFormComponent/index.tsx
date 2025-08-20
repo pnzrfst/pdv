@@ -1,5 +1,6 @@
-import { TextField } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
 import "./index.css";
+import { useState } from "react";
 
 interface FormComponentProps {
   onSubmit: () => void;
@@ -9,13 +10,20 @@ interface FormComponentProps {
   subtitle: string;
 }
 
-export default function FormComponent({
+export default function StockFormComponent({
   onSubmit,
   isOpen,
   onCancel,
   title,
   subtitle,
 }: FormComponentProps) {
+  const [product, setProduct] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [quantity, setQuantity] = useState<number | "">("");
+  const [cost, setCost] = useState<number | "">("");
+  const [price, setPrice] = useState<number | "">("");
+  const [description, setDescription] = useState<string>("");
+
   if (!isOpen) return null;
 
   return (
@@ -31,7 +39,8 @@ export default function FormComponent({
             required
             label="Nome do produto"
             id="name"
-            value={""}
+            value={product}
+            onChange={(e) => setProduct(e.target.value)}
             variant="outlined"
           />
           <TextField
@@ -39,30 +48,52 @@ export default function FormComponent({
             required
             label="Categoria"
             id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             variant="outlined"
-            value={""}
           />
           <TextField
             type="number"
             required
             label="Quantidade"
             id="quantity"
-            value={""}
+            placeholder="Unidades"
+            value={quantity}
+            onChange={(e) =>
+              setQuantity(e.target.value === "" ? "" : Number(e.target.value))
+            }
             variant="outlined"
           />
           <TextField
             type="number"
-            value={""}
             required
-            label="Preço (un)"
+            label="Custo"
+            id="cost"
+            placeholder="Defina quanto pagou por esse produto (R$)"
+            value={cost}
+            onChange={(e) =>
+              setCost(e.target.value === "" ? "" : Number(e.target.value))
+            }
+            variant="outlined"
+          />
+          <TextField
+            type="number"
+            required
+            label="Preço"
             id="price"
+            placeholder="Defina o preço pela venda deste produto (R$)"
+            value={price}
+            onChange={(e) =>
+              setPrice(e.target.value === "" ? "" : Number(e.target.value))
+            }
             variant="outlined"
           />
           <TextField
             type="text"
-            value={""}
             label="Descrição: "
             id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             variant="outlined"
           />
         </div>
