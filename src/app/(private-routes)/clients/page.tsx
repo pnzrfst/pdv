@@ -5,40 +5,38 @@ import { MdPointOfSale } from "react-icons/md";
 import { FaListOl } from "react-icons/fa6";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import {useState } from "react";
+import ClientsForm from "@/components/ClientForm";
 
-import SalesFormComponent from "@/components/SalesForm";
 
 
-export default function Sales() {
+export default function Clients() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [payment, setPayment] = useState<string>("")
-  const [product, setProduct] = useState<string>("")
 
   return (
     <div>
       <header className={styles.header}>
-        <h3>Vendas</h3>
-        <p>Tenha controle dos indicadores sobre as vendas do seu negócio.</p>
+        <h3>Clientes</h3>
+        <p>Tenha controle sob as informações dos seus clientes.</p>
       </header>
       <section className={styles.topBoxes}>
         <ul className={styles.boxes}>
           <li className={styles.aboutTopBox}>
-            <h1 className={styles.h1}>R$ 1200,00</h1>
+            <h1 className={styles.h1}>12</h1>
             <div className={styles.headerBox}>
-              <h4 className={styles.h4}>Ganhos no dia de hoje.</h4>
+              <h4 className={styles.h4}>Clientes em débito</h4>
               <FaMoneyBillTrendUp className={styles.svg} size={25} />
             </div>
             <p className={styles.subtitle}>
-              Total ganho pelas vendas no dia de hoje:.
+              Clientes em débito com seu PDV.
             </p>
           </li>
           <li className={styles.aboutTopBox}>
             <h1 className={styles.h1}>210</h1>
             <div className={styles.headerBox}>
-              <h4 className={styles.h4}>Quantidade de vendas.</h4>
+              <h4 className={styles.h4}>Quantidade de clientes</h4>
               <FaListOl className={styles.svg} size={25} />
             </div>
-            <p className={styles.subtitle}>Quantidade de vendas registradas.</p>
+            <p className={styles.subtitle}>Quantidade de clientes registrados na nossa base de dados.</p>
           </li>
           <li className={styles.aboutTopBox}>
             <h1 className={styles.h1}>R$ 250,00</h1>
@@ -53,33 +51,27 @@ export default function Sales() {
         </ul>
       </section>
       <main className={styles.mainContent}>
-        <section className={styles.recordNewSale}>
-          <div className={styles.recordNewSaleContainer}>
+        <section className={styles.recordNewClient}>
+          <div className={styles.recordNewClientContainer}>
             <div className={styles.info}>
-              <h3 className={styles.h3}>Registrar venda: </h3>
-              <p className={styles.salesP}>Registre suas vendas.</p>
+              <h3 className={styles.h3}>Registrar cliente: </h3>
+              <p className={styles.clientsP}>Registre seus clientes.</p>
             </div>
             <button
-              className={styles.addNewSale}
+              className={styles.addNewClients}
               onClick={() => setIsOpen(true)}
             >
               Registrar
             </button>
-            <SalesFormComponent 
-              title="Registrar vendas:"
-              subtitle="Insira as informações e registre uma venda."
-              onSubmit={() => console.log("Foi-se embora")}
-              isOpen={isOpen}
-              payment={payment}
-              setPayment={setPayment}
-              setProduct={setProduct}
-              product={product}
-              onCancel={() => {
-                setIsOpen(!isOpen)
-                setPayment("");
-                setProduct("");
-              }}
-            ></SalesFormComponent>
+            <ClientsForm
+              title="Cadastrar cliente"
+              subtitle="Insira as informações e cadastre um cliente."
+              onSubmit={() => console.log("oi")}
+              isOpen = {isOpen}
+              onCancel={() => setIsOpen(!isOpen)}
+            >
+
+            </ClientsForm>
           </div>
         </section>
         <section className={styles.graphsContainer}>

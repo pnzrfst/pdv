@@ -1,9 +1,9 @@
 "use client";
-import TableComponent from "@/components/TableComponent";
+import TableComponent from "@/components/Table";
 import styles from "./page.module.css";
 import { FaListOl } from "react-icons/fa6";
 import { useState } from "react";
-import StockFormComponent from "@/components/StockFormComponent";
+import StockFormComponent from "@/components/StockForm";
 
 export default function Stock() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -34,20 +34,20 @@ export default function Stock() {
               <p className={styles.p}>Quantidade de produtos.</p>
             </li>
             <li className={styles.aboutTopBox}>
-              <h4 className={styles.h4}>Valor do estoque</h4>
+              <h4 className={styles.h4}>Valor do estoque:</h4>
               <div className={styles.headerBox}>
                 <h1 className={styles.h1}>R$ 310,00</h1>
                 <FaListOl className={styles.svg} size={25} />
               </div>
-              <p className={styles.p}>Valor do estoque</p>
+              <p className={styles.p}>Valor do estoque.</p>
             </li>
             <li className={styles.aboutTopBox}>
-              <h4 className={styles.h4}>Fornecedores</h4>
+              <h4 className={styles.h4}>Fornecedores:</h4>
               <div className={styles.headerBox}>
                 <h1 className={styles.h1}>200</h1>
                 <FaListOl className={styles.svg} size={25} />
               </div>
-              <p className={styles.p}>Quantidade de fornecedores</p>
+              <p className={styles.p}>Quantidade de fornecedores.</p>
             </li>
           </ul>
         </section>

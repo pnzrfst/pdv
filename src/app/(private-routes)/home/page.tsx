@@ -1,4 +1,4 @@
-import TableComponent from "@/components/TableComponent";
+import TableComponent from "@/components/Table";
 import styles from "./page.module.css";
 import { BsBox } from "react-icons/bs";
 import { FaMoneyBill1Wave } from "react-icons/fa6";

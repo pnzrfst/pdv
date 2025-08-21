@@ -5,6 +5,7 @@ import { BsBox } from "react-icons/bs";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlinePointOfSale } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 
 export default function LateralMenu() {
   const router = useRouter()
@@ -31,6 +32,10 @@ export default function LateralMenu() {
         <li className="menuItem" onClick={() => router.push('/income')}>
           <p>Faturamento</p>
           <FaMoneyBill1Wave color="black" />
+        </li>
+        <li className="menuItem" onClick={() => router.push('/clients')}>
+          <p>Clientes</p>
+          <FaUser color="black" />
         </li>
       </ul>
     </div>

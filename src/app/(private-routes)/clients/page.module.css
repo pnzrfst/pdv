@@ -1,0 +1,191 @@
+:root {
+  --primary-color: #1F2937;
+  --secondary-color: #4B5563;
+  --accent-color: #3B82F6;
+  --bg-color: #F9FAFB;
+  --box-bg: #FFFFFF;
+  --text-dark: #111827;
+  --text-light: #6B7280;
+  --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  --radius: 6px;
+  --transition: 0.3s ease-in-out;
+}
+
+/* ---------------------------- SVG ---------------------------- */
+.svg {
+  fill: var(--text-dark);
+  stroke: var(--text-dark);
+}
+
+/* ---------------------------- HEADER ---------------------------- */
+.header {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.header h2 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  font-weight: 300;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* ---------------------------- MAIN CONTENT ---------------------------- */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* ---------------------------- TOP BOXES ---------------------------- */
+.topBoxes {
+  margin: 2rem 1rem 1rem 1rem;
+}
+
+.boxes {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.boxes .headerBox {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.boxes .aboutTopBox {
+  flex: 1;
+  min-width: 300px;
+  background-color: var(--box-bg);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.aboutTopBox .h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.35rem;
+  animation: slideFromRight 0.4s ease-out;
+}
+
+.headerBox,
+.h4,
+.p {
+  color: var(--text-light);
+  animation: slideFromRight 0.4s ease-out;
+}
+
+.subtitle {
+  text-align: justify;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------- RECORD NEW SALE ---------------------------- */
+.recordNewClient {
+  padding: 1rem 2rem;
+  margin: 2rem 1rem;
+  border-radius: var(--radius);
+
+}
+
+.recordNewClientContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.recordNewClient h3{
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.recordNewSClient .clientsP{
+  font-weight: 300;
+  color: var(--text-light);
+}
+
+.addNewClients {
+  border-radius: var(--radius);
+  border: none;
+  color: var(--box-bg);
+  cursor: pointer;
+  padding: 0.85rem 1.50rem;
+  background-color: var(--primary-color);
+  width: fit-content;
+  transition: var(--transition);
+}
+
+.addNewClients:hover {
+  background-color: var(--secondary-color);
+}
+
+/* ---------------------------- GRAPHS ---------------------------- */
+.graphsContainer {
+  margin: 1rem;
+  padding: 2rem;
+}
+
+.graphsContainer .graph {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.graphsContainer .graph span {
+  flex: 1;
+  min-width: 300px;
+  background: linear-gradient(135deg, #3B82F6, #60A5FA);
+  text-align: center;
+  color: #fff;
+  padding: 4rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+  font-size: 1.25rem;
+  transition: var(--transition);
+}
+
+.graphsContainer .graph span:hover {
+  transform: translateY(-4px);
+}
+
+/* ---------------------------- SALES LIST ---------------------------- */
+.listSales {
+  margin: 2rem 1rem;
+  padding: 1rem 2rem;
+  background-color: var(--box-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---------------------------- ANIMATIONS ---------------------------- */
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(40%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
