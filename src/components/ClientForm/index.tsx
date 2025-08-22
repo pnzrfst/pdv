@@ -36,7 +36,7 @@ export default function ClientsForm({
           <h1>{title}</h1>
           <p>{subtitle}</p>
         </span>
-        <div className="inputs">
+        <form className="inputs" onSubmit={onSubmit}>
           <TextField
             type="text"
             required
@@ -64,9 +64,9 @@ export default function ClientsForm({
             onChange={(e) => setContact(e.target.value)}
             variant="outlined"
           />
-        </div>
+        </form>
         <div className="btnsAction">
-          <button id="saveButton" onClick={onSubmit}>
+          <button id="saveButton">
             Salvar
           </button>
           <button id="cancelButton" onClick={onCancel}>

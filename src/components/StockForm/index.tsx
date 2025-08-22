@@ -1,4 +1,13 @@
-import {TextField } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import "./index.css";
 import { useState } from "react";
 
@@ -20,9 +29,20 @@ export default function StockFormComponent({
   const [product, setProduct] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [quantity, setQuantity] = useState<number | "">("");
+
   const [cost, setCost] = useState<number | "">("");
   const [price, setPrice] = useState<number | "">("");
   const [description, setDescription] = useState<string>("");
+
+  //conseguir selecionar no select das categorias >
+  const [categories, setCategories] = useState<string[]>([
+    "Bebidas",
+    "Alimentos",
+    "Higiene",
+  ]);
+
+  //controlar o estado do modal de cadastro da categoria >
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   if (!isOpen) return null;
 
@@ -33,7 +53,7 @@ export default function StockFormComponent({
           <h1>{title}</h1>
           <p>{subtitle}</p>
         </span>
-        <div className="inputs">
+        <form className="inputs" onSubmit={onSubmit}>
           <TextField
             type="text"
             required
@@ -44,26 +64,45 @@ export default function StockFormComponent({
             variant="outlined"
           />
           <TextField
-            type="text"
-            required
-            label="Categoria"
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            variant="outlined"
-          />
-          <TextField
             type="number"
             required
-            label="Quantidade"
-            id="quantity"
-            placeholder="Unidades"
+            label="Quantidade em estoque"
+            id="name"
             value={quantity}
-            onChange={(e) =>
-              setQuantity(e.target.value === "" ? "" : Number(e.target.value))
-            }
+            onChange={(e) => setQuantity(Number(e.target.value))}
             variant="outlined"
           />
+
+          <div className="chooseCategory">
+            <button
+              id="saveButton"
+              onClick={() => {
+                setIsModalOpen(true)
+                setCategory("")
+              }}
+              type="button"
+            >
+              Cadastrar categoria
+            </button>
+            <div className="selectCategoryBox">
+              <InputLabel id="subtitle">Selecionar produto</InputLabel>
+              <Select
+                labelId="ChooseCategory"
+                id="ChooseCategory"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <MenuItem value="">
+                  <em>Selecione uma categoria</em>
+                </MenuItem>
+                {categories.map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+          </div>
           <TextField
             type="number"
             required
@@ -96,16 +135,50 @@ export default function StockFormComponent({
             onChange={(e) => setDescription(e.target.value)}
             variant="outlined"
           />
-        </div>
+        </form>
         <div className="btnsAction">
-          <button id="saveButton" onClick={onSubmit}>
-            Salvar
-          </button>
-          <button id="cancelButton" onClick={onCancel}>
+          <button id="saveButton">Salvar</button>
+          <button
+            id="cancelButton"
+            onClick={() => {
+              onCancel();
+              setCategory("");
+            }}
+          >
             Cancelar
           </button>
         </div>
       </div>
+      {/*Cadastrar nova categoria*/}
+      <Dialog className="modalNewCategory" open={isModalOpen}>
+        <DialogTitle className="modalTitle">
+          Cadastrar nova categoria
+        </DialogTitle>
+        <DialogContent className="body">
+          <DialogContentText className="subtitle">
+            Insira as informações e cadastre uma nova categoria
+          </DialogContentText>
+          <form>
+            <input type="text" id="categoryName"/>
+            <div className="btnsAction">
+              <button
+                id="saveButton"
+                onClick={() => alert("Cadastrar")}
+                type="button"
+              >
+                Cadastrar
+              </button>
+              <button
+                id="cancelButton"
+                onClick={() => setIsModalOpen(false)}
+                type="button"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

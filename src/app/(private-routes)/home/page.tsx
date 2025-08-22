@@ -50,26 +50,26 @@ export default function Home() {
             <li className={styles.aboutMainBox}>
               <div className={styles.headerBox}>
                 <h2>Faturamento</h2>
-                <TableComponent></TableComponent>
+                
               </div>
             </li>
             <li className={styles.aboutMainBox}>
               <div className={styles.headerBox}>
                 <h2>Teste de box</h2>
-                <TableComponent></TableComponent>
+                
               </div>
  
             </li>
             <li className={styles.aboutMainBox}>
               <div className={styles.headerBox}>
                 <h2>Teste de box</h2>
-                <TableComponent></TableComponent>
+                
               </div>
             </li>
             <li className={styles.aboutMainBox}>
               <div className={styles.headerBox}>
                 <h2>Teste de box</h2>
-                <TableComponent></TableComponent>
+                
               </div>
             </li>
           </ul>

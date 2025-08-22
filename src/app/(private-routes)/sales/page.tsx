@@ -1,18 +1,110 @@
-"use client"
+"use client";
 import TableComponent from "@/components/Table";
 import styles from "./page.module.css";
 import { MdPointOfSale } from "react-icons/md";
 import { FaListOl } from "react-icons/fa6";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
-import {useState } from "react";
+import { useState } from "react";
 
 import SalesFormComponent from "@/components/SalesForm";
 
-
 export default function Sales() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [payment, setPayment] = useState<string>("")
-  const [product, setProduct] = useState<string>("")
+  const [payment, setPayment] = useState<string>("");
+  const [product, setProduct] = useState<string>("");
+
+  const columns = [
+    {
+      field: 'id',
+      headerName: 'ID',
+      width: 60
+    },
+    {
+      field: 'data',
+      headerName: 'Data da venda',
+      width: 222
+    },
+    {
+      field: 'valor_total',
+      headerName: 'Valor total',
+      width: 222
+    },
+    {
+      field: 'metodo_pagamento',
+      headerName: 'Método de pagamento',
+      width: 222
+    },
+    {
+      field: 'cliente',
+      headerName: 'Cliente',
+      width: 222
+    },
+    {
+      field: 'produtos',
+      headerName: 'Produtos',
+      width: 222
+    }
+  ]
+
+  const rows = [
+    {
+      id: 1,
+      data: "2025-08-20",
+      valor_total: 3279.9,
+      metodo_pagamento: "Cartão de Crédito",
+      cliente: 1, // FK para clientes
+      produtos: [1, 2], // FK para produtos
+    },
+    {
+      id: 2,
+      data: "2025-08-21",
+      valor_total: 899.9,
+      metodo_pagamento: "Pix",
+      cliente: 2,
+      produtos: [3],
+    },
+    {
+      id: 3,
+      data: "2025-08-21",
+      valor_total: 399.9,
+      metodo_pagamento: "Dinheiro",
+      cliente: 3,
+      produtos: [4],
+    },
+    {
+      id: 4,
+      data: "2025-08-21",
+      valor_total: 399.9,
+      metodo_pagamento: "Dinheiro",
+      cliente: 3,
+      produtos: [4],
+    },
+    {
+      id: 5,
+      data: "2025-08-21",
+      valor_total: 399.9,
+      metodo_pagamento: "Dinheiro",
+      cliente: 3,
+      produtos: [4],
+    },
+    {
+      id: 6,
+      data: "2025-08-21",
+      valor_total: 399.9,
+      metodo_pagamento: "Dinheiro",
+      cliente: 3,
+      produtos: [4],
+    },
+    {
+      id: 7,
+      data: "2025-08-21",
+      valor_total: 399.9,
+      metodo_pagamento: "Dinheiro",
+      cliente: 3,
+      produtos: [4],
+    },
+
+  ];
 
   return (
     <div>
@@ -65,7 +157,7 @@ export default function Sales() {
             >
               Registrar
             </button>
-            <SalesFormComponent 
+            <SalesFormComponent
               title="Registrar vendas:"
               subtitle="Insira as informações e registre uma venda."
               onSubmit={() => console.log("Foi-se embora")}
@@ -75,7 +167,7 @@ export default function Sales() {
               setProduct={setProduct}
               product={product}
               onCancel={() => {
-                setIsOpen(!isOpen)
+                setIsOpen(!isOpen);
                 setPayment("");
                 setProduct("");
               }}
@@ -89,7 +181,7 @@ export default function Sales() {
           </div>
         </section>
         <section className={styles.listSales}>
-          <TableComponent></TableComponent>
+          <TableComponent columns={columns} rows={rows}></TableComponent>
         </section>
       </main>
     </div>
