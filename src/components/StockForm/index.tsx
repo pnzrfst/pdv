@@ -62,6 +62,7 @@ export default function StockFormComponent({
             value={product}
             onChange={(e) => setProduct(e.target.value)}
             variant="outlined"
+            autoComplete="off"
           />
           <TextField
             type="number"
@@ -71,6 +72,7 @@ export default function StockFormComponent({
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
             variant="outlined"
+            autoComplete="off"
           />
 
           <div className="chooseCategory">
@@ -114,6 +116,7 @@ export default function StockFormComponent({
               setCost(e.target.value === "" ? "" : Number(e.target.value))
             }
             variant="outlined"
+            autoComplete="off"
           />
           <TextField
             type="number"
@@ -125,6 +128,7 @@ export default function StockFormComponent({
             onChange={(e) =>
               setPrice(e.target.value === "" ? "" : Number(e.target.value))
             }
+            autoComplete="off"
             variant="outlined"
           />
           <TextField
@@ -134,6 +138,7 @@ export default function StockFormComponent({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             variant="outlined"
+            autoComplete="off"
           />
         </form>
         <div className="btnsAction">

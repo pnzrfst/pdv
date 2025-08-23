@@ -45,6 +45,7 @@ export default function ClientsForm({
             value={name}
             variant="outlined"
             onChange={(e) => setName(e.target.value)}
+            autoComplete="off"
           />
           <TextField
             type="text"
@@ -54,6 +55,7 @@ export default function ClientsForm({
             id="address"
             onChange={(e) => setAddress(e.target.value)}
             variant="outlined"
+            autoComplete="off"
           />
           <TextField
             type="number"
@@ -63,6 +65,7 @@ export default function ClientsForm({
             id="contact"
             onChange={(e) => setContact(e.target.value)}
             variant="outlined"
+            autoComplete="off"
           />
         </form>
         <div className="btnsAction">

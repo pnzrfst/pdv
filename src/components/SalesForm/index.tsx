@@ -60,6 +60,7 @@ export default function SalesFormComponent({
             id="name"
             value={name}
             variant="outlined"
+            autoComplete="off"
             onChange={(e) => setName(e.target.value)}
           />
           <InputLabel id="ChooseProduct">Selecionar produto</InputLabel>
@@ -94,6 +95,7 @@ export default function SalesFormComponent({
             id="quantity"
             onChange={(e) => setQuantity(e.target.value)}
             variant="outlined"
+            autoComplete="off"
           />
           <TextField
             type="text"
@@ -104,6 +106,7 @@ export default function SalesFormComponent({
             label="Descrição: "
             id="description"
             variant="outlined"
+            autoComplete="off"
           />
         </form>
         <div className="btnsAction">
