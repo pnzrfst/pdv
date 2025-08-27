@@ -2,12 +2,52 @@
 import TableComponent from "@/components/Table";
 import styles from "./page.module.css";
 import { FaListOl } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {API} from '@/api'
+
 import StockFormComponent from "@/components/StockForm";
+
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  quantity: number;
+  cost: number;
+  price: number;
+  description: string; 
+  category_id: string;
+}
+
 
 export default function Stock() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categoriesCount, setCategoriesCount] = useState<number>(0);
 
+  useEffect(() => {
+    loadProducts();
+    countCategories();
+  }, []);
+
+  async function countCategories(){
+    try {
+      const response = await API.get('/categories');
+      setCategoriesCount(response.data.total);
+    } catch (error) {
+      console.error("Erro ao buscar as categorias:", error);
+    }
+  }
+  
+  async function loadProducts(){
+    try {
+      const response = await API.get<Product[]>('/products');
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar os produtos:", error);
+      
+    }
+  }
+  
   const columns = [
     {
       field: "id",
@@ -15,102 +55,49 @@ export default function Stock() {
       width: 60,
     },
     {
-      field: "nome",
+      field: "name",
       headerName: "Nome",
       width: 200,
     },
     {
-      field: "categoria",
-      headerName: "Categoria",
+      field: "category_id",
+      headerName: "ID Categoria",
       width: 200,
     },
     {
-      field: "quantidade",
+      field: "quantity",
       headerName: "Quantidade",
       width: 200,
     },
     {
-      field: "custo",
+      field: "cost",
       headerName: "Custo",
       width: 200,
     },
     {
-      field: "preco_venda",
+      field: "price",
       headerName: "Preço venda",
       width: 200,
     },
     {
-      field: "descricao",
+      field: "description",
       headerName: "Descrição",
       width: 200,
     },
+    
   ];
 
-  const rows = [
-    {
-      id: 1,
-      nome: "Notebook Dell Inspiron",
-      categoria: "Eletrônicos",
-      quantidade: 15,
-      custo: 2500.0,
-      preco_venda: 3200.0,
-      descricao: "Notebook i5, 8GB RAM, SSD 256GB",
-    },
-    {
-      id: 2,
-      nome: "Mouse Logitech M170",
-      categoria: "Acessórios",
-      quantidade: 50,
-      custo: 40.0,
-      preco_venda: 79.9,
-      descricao: "Mouse sem fio",
-    },
-    {
-      id: 3,
-      nome: "Cadeira Gamer Redragon",
-      categoria: "Móveis",
-      quantidade: 10,
-      custo: 600.0,
-      preco_venda: 899.9,
-      descricao: "Cadeira gamer reclinável",
-    },
-    {
-      id: 4,
-      nome: "Teclado Mecânico HyperX",
-      categoria: "Acessórios",
-      quantidade: 20,
-      custo: 250.0,
-      preco_venda: 399.9,
-      descricao: "Teclado mecânico RGB Switch Blue",
-    },
-    {
-      id: 5,
-      nome: "Monitor LG 24''",
-      categoria: "Eletrônicos",
-      quantidade: 12,
-      custo: 800.0,
-      preco_venda: 1199.9,
-      descricao: "Monitor Full HD 24 polegadas",
-    },
-    {
-      id: 6,
-      nome: "Cabo HDMI 2m",
-      categoria: "Acessórios",
-      quantidade: 100,
-      custo: 15.0,
-      preco_venda: 39.9,
-      descricao: "Cabo HDMI de alta velocidade",
-    },
-    {
-      id: 7,
-      nome: "Cadeira de Escritório",
-      categoria: "Móveis",
-      quantidade: 8,
-      custo: 350.0,
-      preco_venda: 599.9,
-      descricao: "Cadeira ergonômica para escritório",
-    },
-  ];
+  const rows = products.map((product) => ({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      quantity: product.quantity,
+      cost: product.cost,
+      price: product.price,
+      description: product.description,
+      category_id: product.category_id
+  
+  }));
 
   return (
     <div>
@@ -124,7 +111,7 @@ export default function Stock() {
             <li className={styles.aboutTopBox}>
               <h4 className={styles.h4}>Categorias:</h4>
               <div className={styles.headerBox}>
-                <h1 className={styles.h1}>10</h1>
+                <h1 className={styles.h1}>{categoriesCount}</h1>
                 <FaListOl className={styles.svg} size={25} />
               </div>
               <p className={styles.p}>Todas as categorias.</p>
@@ -175,9 +162,9 @@ export default function Stock() {
             <StockFormComponent
               title="Cadastrar produto:"
               subtitle="Insira as informações e cadastre um produto."
-              onSubmit={() => console.log("Foi-se embora")}
+              onSubmit={loadProducts}
               isOpen={isOpen}
-              onCancel={() => setIsOpen(!isOpen)}
+              onCancel={() => setIsOpen(false)}
             ></StockFormComponent>
           </div>
         </section>

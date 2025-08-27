@@ -74,7 +74,7 @@
 
 .aboutTopBox {
   flex: 1;
-  min-width: 300px;
+  max-width: 300px;
   background-color: var(--box-bg);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
