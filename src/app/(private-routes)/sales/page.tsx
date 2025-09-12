@@ -4,107 +4,91 @@ import styles from "./page.module.css";
 import { MdPointOfSale } from "react-icons/md";
 import { FaListOl } from "react-icons/fa6";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SalesFormComponent from "@/components/SalesForm";
+import { API } from "@/api";
+
+interface Sales {
+  id: string;
+  date: Date;
+  total: number;
+  payment_method: string;
+  client_id: string;
+  createdAt: Date;
+}
 
 export default function Sales() {
+  useEffect(() => {
+    handleGetAllSales();
+  }, []);
+
+
+  const [sales, setSales] = useState<Sales[]>([]);
+  const [totalSales, setTotalSales] = useState<number>(0);
+  const [averageTicket, setAverageTicket] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [payment, setPayment] = useState<string>("");
   const [product, setProduct] = useState<string>("");
 
   const columns = [
     {
-      field: 'id',
-      headerName: 'ID',
-      width: 60
+      field: "id",
+      headerName: "ID",
+      width: 60,
     },
     {
-      field: 'data',
-      headerName: 'Data da venda',
-      width: 222
+      field: "date",
+      headerName: "Data da venda",
+      width: 222,
     },
     {
-      field: 'valor_total',
-      headerName: 'Valor total',
-      width: 222
+      field: "total",
+      headerName: "Valor total",
+      width: 222,
     },
     {
-      field: 'metodo_pagamento',
-      headerName: 'Método de pagamento',
-      width: 222
+      field: "payment_method",
+      headerName: "Método de pagamento",
+      width: 222,
     },
     {
-      field: 'cliente',
-      headerName: 'Cliente',
-      width: 222
+      field: "client_id",
+      headerName: "Cliente",
+      width: 222,
     },
     {
-      field: 'produtos',
-      headerName: 'Produtos',
-      width: 222
-    }
-  ]
-
-  const rows = [
-    {
-      id: 1,
-      data: "2025-08-20",
-      valor_total: 3279.9,
-      metodo_pagamento: "Cartão de Crédito",
-      cliente: 1, // FK para clientes
-      produtos: [1, 2], // FK para produtos
+      field: "products",
+      headerName: "Produtos",
+      width: 222,
     },
-    {
-      id: 2,
-      data: "2025-08-21",
-      valor_total: 899.9,
-      metodo_pagamento: "Pix",
-      cliente: 2,
-      produtos: [3],
-    },
-    {
-      id: 3,
-      data: "2025-08-21",
-      valor_total: 399.9,
-      metodo_pagamento: "Dinheiro",
-      cliente: 3,
-      produtos: [4],
-    },
-    {
-      id: 4,
-      data: "2025-08-21",
-      valor_total: 399.9,
-      metodo_pagamento: "Dinheiro",
-      cliente: 3,
-      produtos: [4],
-    },
-    {
-      id: 5,
-      data: "2025-08-21",
-      valor_total: 399.9,
-      metodo_pagamento: "Dinheiro",
-      cliente: 3,
-      produtos: [4],
-    },
-    {
-      id: 6,
-      data: "2025-08-21",
-      valor_total: 399.9,
-      metodo_pagamento: "Dinheiro",
-      cliente: 3,
-      produtos: [4],
-    },
-    {
-      id: 7,
-      data: "2025-08-21",
-      valor_total: 399.9,
-      metodo_pagamento: "Dinheiro",
-      cliente: 3,
-      produtos: [4],
-    },
-
   ];
+
+  async function handleGetAllSales() {
+    try {
+      const response = await API.get("/sales");
+      setSales(response.data.sales);
+      setTotalSales(response.data.countSales);
+      setAverageTicket(response.data.averageTicket);
+    } catch (error) {
+      console.error("Erro ao buscar as vendas:", error);
+    }
+  }
+
+  const rows = sales.map((sale) => ({
+    id: sale.id,
+    date: new Intl.DateTimeFormat("pt-BR", {
+      dateStyle: "short",
+      timeStyle: "short",
+    }).format(new Date(sale.date)),
+    total: new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(sale.total),
+    payment_method: sale.payment_method,
+    client_id: sale.client_id,
+    products: "Ver produtos",
+  }));
 
   return (
     <div>
@@ -125,7 +109,7 @@ export default function Sales() {
             </p>
           </li>
           <li className={styles.aboutTopBox}>
-            <h1 className={styles.h1}>210</h1>
+            <h1 className={styles.h1}>{totalSales}</h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Quantidade de vendas.</h4>
               <FaListOl className={styles.svg} size={25} />
@@ -133,7 +117,11 @@ export default function Sales() {
             <p className={styles.subtitle}>Quantidade de vendas registradas.</p>
           </li>
           <li className={styles.aboutTopBox}>
-            <h1 className={styles.h1}>R$ 250,00</h1>
+            <h1 className={styles.h1}>{" "}
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(averageTicket)}</h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Valor médio das vendas.</h4>
               <MdPointOfSale className={styles.svg} size={25} />
