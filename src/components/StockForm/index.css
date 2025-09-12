@@ -29,7 +29,7 @@
 .formBody {
   box-shadow: var(--shadow);
   height: auto;
-  width: 40vw;
+  width: 50vw;
   background-color: var(--box-bg);
   padding: 1rem;
   z-index: 1000;

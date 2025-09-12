@@ -159,7 +159,7 @@ export default function StockFormComponent({
               Cadastrar categoria
             </button>
             <div className="selectCategoryBox">
-              <InputLabel id="ChooseCategory">Selecionar produto</InputLabel>
+              <InputLabel id="ChooseCategory">Selecionar</InputLabel>
               <Select
                 labelId="ChooseCategory"
                 id="ChooseCategory"
@@ -228,7 +228,7 @@ export default function StockFormComponent({
           </div>
         </form>
       </div>
-      {/*Cadastrar nova categoria*/}
+      {/*cadastrar nova categoria*/}
       <Dialog className="modalNewCategory" open={isModalOpen}>
         <DialogTitle className="modalTitle">
           Cadastrar nova categoria

@@ -3,7 +3,7 @@ import TableComponent from "@/components/Table";
 import styles from "./page.module.css";
 import { FaListOl } from "react-icons/fa6";
 import { useEffect, useState } from "react";
-import {API} from '@/api'
+import { API } from "@/api";
 
 import StockFormComponent from "@/components/StockForm";
 
@@ -14,40 +14,42 @@ interface Product {
   quantity: number;
   cost: number;
   price: number;
-  description: string; 
+  description: string;
   category_id: string;
 }
-
 
 export default function Stock() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [products, setProducts] = useState<Product[]>([]);
+  const [stockValue, setStockValue] = useState<number>(0);
+  const [totalProductsInStock, setTotalProductsInStock] = useState<number>(0);
   const [categoriesCount, setCategoriesCount] = useState<number>(0);
 
   useEffect(() => {
-    loadProducts();
+    loadOverview();
     countCategories();
   }, []);
 
-  async function countCategories(){
+  async function countCategories() {
     try {
-      const response = await API.get('/categories');
+      const response = await API.get("/categories");
       setCategoriesCount(response.data.total);
     } catch (error) {
       console.error("Erro ao buscar as categorias:", error);
     }
   }
-  
-  async function loadProducts(){
+
+  async function loadOverview() {
     try {
-      const response = await API.get<Product[]>('/products');
-      setProducts(response.data);
+      const response = await API.get("/products");
+      setProducts(response.data.products);
+      setStockValue(response.data.stockValue);
+      setTotalProductsInStock(response.data.totalProducts);
     } catch (error) {
       console.error("Erro ao buscar os produtos:", error);
-      
     }
   }
-  
+
   const columns = [
     {
       field: "id",
@@ -84,19 +86,17 @@ export default function Stock() {
       headerName: "Descrição",
       width: 200,
     },
-    
   ];
 
   const rows = products.map((product) => ({
-      id: product.id,
-      name: product.name,
-      category: product.category,
-      quantity: product.quantity,
-      cost: product.cost,
-      price: product.price,
-      description: product.description,
-      category_id: product.category_id
-  
+    id: product.id,
+    name: product.name,
+    category: product.category,
+    quantity: product.quantity,
+    cost: product.cost,
+    price: product.price,
+    description: product.description,
+    category_id: product.category_id,
   }));
 
   return (
@@ -119,7 +119,7 @@ export default function Stock() {
             <li className={styles.aboutTopBox}>
               <h4 className={styles.h4}>Quantidade de produtos:</h4>
               <div className={styles.headerBox}>
-                <h1 className={styles.h1}>210</h1>
+                <h1 className={styles.h1}>{totalProductsInStock}</h1>
                 <FaListOl className={styles.svg} size={25} />
               </div>
               <p className={styles.p}>Quantidade de produtos.</p>
@@ -127,7 +127,13 @@ export default function Stock() {
             <li className={styles.aboutTopBox}>
               <h4 className={styles.h4}>Valor do estoque:</h4>
               <div className={styles.headerBox}>
-                <h1 className={styles.h1}>R$ 310,00</h1>
+                <h1 className={styles.h1}>
+                  {" "}
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(stockValue)}
+                </h1>
                 <FaListOl className={styles.svg} size={25} />
               </div>
               <p className={styles.p}>Valor do estoque.</p>
@@ -162,9 +168,12 @@ export default function Stock() {
             <StockFormComponent
               title="Cadastrar produto:"
               subtitle="Insira as informações e cadastre um produto."
-              onSubmit={loadProducts}
+              onSubmit={loadOverview}
               isOpen={isOpen}
-              onCancel={() => setIsOpen(false)}
+              onCancel={() => {
+                setIsOpen(false)
+                loadOverview()
+              }}
             ></StockFormComponent>
           </div>
         </section>

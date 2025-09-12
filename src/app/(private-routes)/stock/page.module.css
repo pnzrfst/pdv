@@ -74,7 +74,8 @@
 
 .aboutTopBox {
   flex: 1;
-  max-width: 300px;
+  flex-shrink: 1;
+  max-width: auto;
   background-color: var(--box-bg);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
@@ -83,7 +84,7 @@
 }
 
 .aboutTopBox .h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-top: 1rem;
   color: var(--primary-color);
