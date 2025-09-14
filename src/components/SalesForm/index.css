@@ -26,11 +26,12 @@
 
 .formBody {
   box-shadow: var(--shadow);
-  height: auto;
+  height: 800px;
   width: 40vw;
   background-color: var(--box-bg);
   padding: 1rem;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .formBody .title {
@@ -88,6 +89,40 @@
   margin-top: 4px;
   align-items: center;
 }
+
+.selectedProduct{
+  background-color: var(--box-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: first baseline;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+#selectQuantity{
+  display: flex;
+  width: 20%;
+  background-color: var(--bg-color);
+  margin-top: 6px;
+  border: var(--radius);
+  padding: 6px;
+}
+
+.subTotal{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.subTotal h3{
+  color: var(--text-dark);
+  font-size: 16px;
+}
+
+.subTotal p{
+  font-size: 16px;
+  color: var(--text-light);
+}
+
 
 .btnsAction #cancelButton {
   background-color: var(--box-bg);

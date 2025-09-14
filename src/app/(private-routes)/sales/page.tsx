@@ -18,12 +18,10 @@ interface Sales {
   createdAt: Date;
 }
 
-
 export default function Sales() {
   useEffect(() => {
-    handleGetAllSales();
+    loadOverview();
   }, []);
-
 
   const [sales, setSales] = useState<Sales[]>([]);
   const [totalSales, setTotalSales] = useState<number>(0);
@@ -63,7 +61,7 @@ export default function Sales() {
     },
   ];
 
-  async function handleGetAllSales() {
+  async function loadOverview() {
     try {
       const response = await API.get("/sales");
       setSales(response.data.sales);
@@ -73,7 +71,6 @@ export default function Sales() {
       console.error("Erro ao buscar as vendas:", error);
     }
   }
-
 
   const rows = sales.map((sale) => ({
     id: sale.id,
@@ -117,11 +114,13 @@ export default function Sales() {
             <p className={styles.subtitle}>Quantidade de vendas registradas.</p>
           </li>
           <li className={styles.aboutTopBox}>
-            <h1 className={styles.h1}>{" "}
-                  {new Intl.NumberFormat("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  }).format(averageTicket)}</h1>
+            <h1 className={styles.h1}>
+              {" "}
+              {new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(averageTicket)}
+            </h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Valor médio das vendas.</h4>
               <MdPointOfSale className={styles.svg} size={25} />
@@ -148,10 +147,13 @@ export default function Sales() {
             <SalesFormComponent
               title="Registrar vendas:"
               subtitle="Insira as informações e registre uma venda."
-              onSubmit={() => console.log("Foi-se embora")}
+              onSubmit={() => {
+                loadOverview();
+                setIsOpen(false);
+              }}
               isOpen={isOpen}
               onCancel={() => {
-                setIsOpen(!isOpen);
+                setIsOpen(false);
               }}
             ></SalesFormComponent>
           </div>

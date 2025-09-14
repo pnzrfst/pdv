@@ -11,6 +11,13 @@ import "./index.css";
 import { useEffect, useState } from "react";
 import { API } from "@/api";
 
+type PaymentMethod =
+  | "CARTAO_CREDITO"
+  | "CARTAO_DEBITO"
+  | "DINHEIRO"
+  | "FIADO"
+  | "PIX";
+
 interface SalesComponentProps {
   onSubmit: () => void;
   onCancel: () => void;
@@ -29,14 +36,20 @@ interface Product {
   name: string;
   quantity: number;
   price: number;
+  saleQuantity: number;
 }
 
-interface SaleComposition {
-  composition: [
-    {
-      product: Product;
-    }
-  ];
+interface SaleProduct {
+  product_id: string;
+  quantity: number;
+  price: number;
+}
+
+interface Sale {
+  products: SaleProduct[];
+  client_id: string;
+  isFiado: boolean;
+  payment_method: PaymentMethod;
 }
 
 export default function SalesFormComponent({
@@ -49,7 +62,6 @@ export default function SalesFormComponent({
   useEffect(() => {
     getClients();
     getProducts();
-    console.log(selectedProducts);
   }, []);
 
   //controlar os clientes selecionados no select >
@@ -57,20 +69,16 @@ export default function SalesFormComponent({
   const [selectedClient, setSelectedClient] = useState<string>("");
 
   //controlar os inputs do formulario de vendas >
-  const [quantity, setQuantity] = useState<number>(0);
   const [clients, setClients] = useState<Client[]>([]);
-  const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [payment, setPayment] = useState<string>("");
   const [products, setProducts] = useState<Product[]>([]);
 
   function clearInputs() {
-    setDescription("");
     setSelectedClient("");
     setSelectedProducts([]);
     setPrice(0);
     setPayment("");
-    setDescription("");
   }
 
   async function getClients() {
@@ -109,6 +117,31 @@ export default function SalesFormComponent({
     }
   }
 
+  async function handleCreateSale(event: React.FormEvent) {
+    event.preventDefault();
+
+    const mappedProducts: SaleProduct[] = selectedProducts.map((product) => ({
+      product_id: product.id,
+      quantity: product.saleQuantity,
+      price: product.price,
+    }));
+
+    const saleData: Sale = {
+      products: mappedProducts,
+      client_id: selectedClient,
+      isFiado: payment === "FIADO",
+      payment_method: payment as PaymentMethod,
+    };
+
+    try {
+      await API.post("/sales", saleData);
+      clearInputs();
+      onSubmit();
+    } catch (error) {
+      console.error("Erro ao criar a venda:", error);
+    }
+  }
+
   if (!isOpen) return null;
 
   return (
@@ -118,7 +151,7 @@ export default function SalesFormComponent({
           <h1>{title}</h1>
           <p>{subtitle}</p>
         </span>
-        <form className="inputs" onSubmit={onSubmit}>
+        <form className="inputs" onSubmit={handleCreateSale}>
           <InputLabel id="ChooseClient">Selecionar cliente</InputLabel>
           <Select
             labelId="ChooseClient"
@@ -164,18 +197,36 @@ export default function SalesFormComponent({
           />
           <InputLabel id="SelectQuantity">Selecione a quantidade</InputLabel>
           <List>
-            {selectedProducts.length ? selectedProducts.map((product) => (
-              <span key={product.id} className="selectedProduct">
-                {product.name}
-                <input
-                  type="number"
-                  min={1}
-                  max={product.quantity}
-                  defaultValue={1}
-                  onChange={(e) => setQuantity(Number(e.target.value))}
-                />
-              </span>
-            )) : <p>Nenhum produto selecionado</p>}
+            {selectedProducts.length ? (
+              selectedProducts.map((product) => (
+                <span key={product.id} className="selectedProduct">
+                  <p> {product.name}</p>
+                  <input
+                    id="selectQuantity"
+                    type="number"
+                    value={product.saleQuantity ?? 0}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      setSelectedProducts((prev) =>
+                        prev.map((p) =>
+                          p.id === product.id
+                            ? { ...p, saleQuantity: value }
+                            : p
+                        )
+                      );
+                      const total = selectedProducts.reduce(
+                        (acc, p) => acc + (p.saleQuantity ?? 1) * p.price,
+                        0
+                      );
+                      setPrice(total);
+                      
+                    }}
+                  />
+                </span>
+              ))
+            ) : (
+              <p>Nenhum produto selecionado</p>
+            )}
           </List>
           <InputLabel id="PaymentMethod">Método de pagamento</InputLabel>
           <Select
@@ -184,46 +235,31 @@ export default function SalesFormComponent({
             value={payment}
             onChange={(e) => setPayment(e.target.value)}
           >
-            <MenuItem value="Pix">Pix</MenuItem>
-            <MenuItem value="Dinheiro">Dinheiro</MenuItem>
-            <MenuItem value="Débito">Débito</MenuItem>
-            <MenuItem value="Crédito">Crédito</MenuItem>
-            <MenuItem value="Fiado">Fiado</MenuItem>
+            <MenuItem value="CARTAO_CREDITO">Cartão de crédito</MenuItem>
+            <MenuItem value="CARTAO_DEBITO">Cartão de débito</MenuItem>
+            <MenuItem value="DINHEIRO">Dinheiro</MenuItem>
+            <MenuItem value="FIADO">Fiado</MenuItem>
+            <MenuItem value="PIX">Pix</MenuItem>
           </Select>
-          <TextField
-            type="number"
-            value={price}
-            label="Valor da venda"
-            id="price"
-            onChange={(e) => setPrice(Number(e.target.value))}
-            variant="outlined"
-            autoComplete="off"
-            disabled
-          />
-          <TextField
-            type="text"
-            onChange={(e) => {
-              setDescription(e.target.value);
-              console.log(description);
-            }}
-            label="Descrição: "
-            id="description"
-            variant="outlined"
-            autoComplete="off"
-          />
+          <span className="subTotal">
+            <h3>Total da venda:</h3>
+            <p>R${price}</p>
+          </span>
+          <div className="btnsAction">
+            <button id="saveButton" type="submit">
+              Salvar
+            </button>
+            <button
+              id="cancelButton"
+              onClick={() => {
+                onCancel();
+                clearInputs();
+              }}
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
-        <div className="btnsAction">
-          <button id="saveButton">Salvar</button>
-          <button
-            id="cancelButton"
-            onClick={() => {
-              onCancel();
-              clearInputs();
-            }}
-          >
-            Cancelar
-          </button>
-        </div>
       </div>
     </div>
   );
