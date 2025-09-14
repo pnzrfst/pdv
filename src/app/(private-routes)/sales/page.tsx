@@ -18,6 +18,7 @@ interface Sales {
   createdAt: Date;
 }
 
+
 export default function Sales() {
   useEffect(() => {
     handleGetAllSales();
@@ -28,8 +29,6 @@ export default function Sales() {
   const [totalSales, setTotalSales] = useState<number>(0);
   const [averageTicket, setAverageTicket] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [payment, setPayment] = useState<string>("");
-  const [product, setProduct] = useState<string>("");
 
   const columns = [
     {
@@ -74,6 +73,7 @@ export default function Sales() {
       console.error("Erro ao buscar as vendas:", error);
     }
   }
+
 
   const rows = sales.map((sale) => ({
     id: sale.id,
@@ -150,14 +150,8 @@ export default function Sales() {
               subtitle="Insira as informações e registre uma venda."
               onSubmit={() => console.log("Foi-se embora")}
               isOpen={isOpen}
-              payment={payment}
-              setPayment={setPayment}
-              setProduct={setProduct}
-              product={product}
               onCancel={() => {
                 setIsOpen(!isOpen);
-                setPayment("");
-                setProduct("");
               }}
             ></SalesFormComponent>
           </div>

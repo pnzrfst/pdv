@@ -141,7 +141,7 @@ export default function Stock() {
             <li className={styles.aboutTopBox}>
               <h4 className={styles.h4}>Fornecedores:</h4>
               <div className={styles.headerBox}>
-                <h1 className={styles.h1}>200</h1>
+                <h1 className={styles.h1}>Em breve</h1>
                 <FaListOl className={styles.svg} size={25} />
               </div>
               <p className={styles.p}>Quantidade de fornecedores.</p>

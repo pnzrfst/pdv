@@ -9,17 +9,21 @@ import {
   TextField,
 } from "@mui/material";
 import "./index.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API } from "@/api";
 
 interface Product {
   name: string;
-  category: string;
   quantity: number;
+  category_id: string;
   cost: number;
   price: number;
   description: string;
-  category_id: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
 }
 
 interface FormComponentProps {
@@ -37,6 +41,11 @@ export default function StockFormComponent({
   title,
   subtitle,
 }: FormComponentProps) {
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+  
   //controlar os estados dos inputs do formulario de cadastro do produto >
   const [product, setProduct] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -45,46 +54,62 @@ export default function StockFormComponent({
   const [price, setPrice] = useState<number | "">("");
   const [description, setDescription] = useState<string>("");
 
-  //controlar o estado do input de cadastro de categoria > 
+  //controlar o estado do input de cadastro de categoria >
   const [newCategory, setNewCategory] = useState<string>("");
 
-
   //conseguir selecionar no select das categorias || buscar as categorias na api >
-  const [categories, setCategories] = useState<string[]>([
-    "5e9f8b7a-1234-4567-890a-bcdef1234567",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-  ]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
+  function clearInputs() {
+    setProduct("");
+    setCategory("");
+    setQuantity("");
+    setCost("");
+    setPrice("");
+    setDescription("");
+  }
+
+  async function getCategories() {
+    try {
+      const list = await API.get("/categories/all");
+
+      const categoryList: Category[] = list.data.map(
+        (cat: { name: string; id: string }) => ({
+          name: cat.name,
+          id: cat.id,
+        })
+      );
+      console.log(categoryList);
+      setCategories(categoryList);
+    } catch (error : any) {
+      console.error("Erro ao buscar as categorias:", {error: error.message});
+    }
+  }
 
   async function handleCreateNewCategory(event: React.FormEvent) {
     event.preventDefault();
 
-    if(!newCategory){
+    if (!newCategory) {
       alert("Por favor, insira o nome da categoria.");
       return;
     }
 
     try {
-      await API.post("/categories", {name: newCategory});
+      await API.post("/categories", { name: newCategory });
       alert("Categoria criada com sucesso!");
-      setCategories(prevCategories => [...prevCategories, newCategory]);
       setNewCategory("");
+      getCategories();
       setIsModalOpen(false);
-
     } catch (error) {
       alert("Erro ao criar a categoria. Por favor, tente novamente.");
-      console.error("Erro ao criar a categoria:", error); 
+      console.error("Erro ao criar a categoria:", error);
     }
   }
 
   async function handleCreateNewProduct(event: React.FormEvent) {
     event.preventDefault();
 
-    if (!product || !category || !quantity || !cost || !price) {
+    if (!product || !quantity || !category || !cost || !price) {
       alert("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
@@ -92,17 +117,17 @@ export default function StockFormComponent({
     try {
       const newProduct: Product = {
         name: product,
-        category: category,
         quantity: Number(quantity),
+        category_id: category,
         cost: Number(cost),
         price: Number(price),
         description: description,
-        category_id: category,
       };
       console.log(newProduct);
 
       await API.post("/products", newProduct);
       alert("Produto criado com sucesso!");
+      clearInputs();
       onSubmit();
       onCancel();
     } catch (error) {
@@ -140,7 +165,7 @@ export default function StockFormComponent({
             label="Quantidade em estoque"
             id="quantity"
             value={quantity}
-            onChange={(e) => 
+            onChange={(e) =>
               setQuantity(e.target.value === "" ? "" : Number(e.target.value))
             }
             variant="outlined"
@@ -156,7 +181,7 @@ export default function StockFormComponent({
               }}
               type="button"
             >
-              Cadastrar categoria
+             Selecionar
             </button>
             <div className="selectCategoryBox">
               <InputLabel id="ChooseCategory">Selecionar</InputLabel>
@@ -169,9 +194,9 @@ export default function StockFormComponent({
                 <MenuItem value="">
                   <em>Selecione uma categoria</em>
                 </MenuItem>
-                {categories.map((category, index) => (
-                  <MenuItem key={index} value={category}>
-                    {category}
+                {categories.map((cat) => (
+                  <MenuItem key={cat.id} value={cat.id}>
+                    {cat.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -213,14 +238,14 @@ export default function StockFormComponent({
             autoComplete="off"
           />
           <div className="btnsAction">
-            <button id="saveButton" onSubmit={handleCreateNewProduct}>
+            <button id="saveButton" type="submit">
               Salvar
             </button>
             <button
               id="cancelButton"
               onClick={() => {
                 onCancel();
-                setCategory("");
+                clearInputs();
               }}
             >
               Cancelar
@@ -238,16 +263,14 @@ export default function StockFormComponent({
             Insira as informações e cadastre uma nova categoria
           </DialogContentText>
           <form onSubmit={handleCreateNewCategory}>
-            <input type="text" 
-            id="categoryName" 
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}/>
+            <input
+              type="text"
+              id="categoryName"
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+            />
             <div className="btnsAction">
-              <button
-                id="saveButton"
-                onSubmit={handleCreateNewCategory}
-                type="submit"
-              >
+              <button id="saveButton" type="submit">
                 Cadastrar
               </button>
               <button

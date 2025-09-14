@@ -81,6 +81,14 @@
   color: var(--box-bg);
 }
 
+#addProduct{
+  background-color: var(--secondary-color);
+  color: var(--box-bg);
+  padding: 4px;
+  margin-top: 4px;
+  align-items: center;
+}
+
 .btnsAction #cancelButton {
   background-color: var(--box-bg);
   border: 1px solid var(--text-light);

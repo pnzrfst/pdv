@@ -4,11 +4,26 @@ import styles from "./page.module.css";
 import { MdPointOfSale } from "react-icons/md";
 import { FaListOl } from "react-icons/fa6";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClientsForm from "@/components/ClientForm";
+import { API } from "@/api";
+
+interface Clients {
+  id: string;
+  name: string;
+  phone: string;
+  address: string;
+}
 
 export default function Clients() {
+  useEffect(() => {
+    loadOverview();
+  }, []);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [countClients, setCountClients] = useState<number>(0);  
+  const [countFiado, setCountFiado] = useState<number>(0);
+  const [clients, setClients] = useState<Clients[]>([]);
   const columns = [
     {
       field: "id",
@@ -32,32 +47,25 @@ export default function Clients() {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      nome: "João Silva",
-      contato: "11987654321",
-      endereco: "Rua das Flores, 123 - São Paulo/SP",
-    },
-    {
-      id: 2,
-      nome: "Maria Oliveira",
-      contato: "21998765432",
-      endereco: "Av. Atlântica, 456 - Rio de Janeiro/RJ",
-    },
-    {
-      id: 3,
-      nome: "Carlos Souza",
-      contato: "31991234567",
-      endereco: "Rua das Palmeiras, 789 - Belo Horizonte/MG",
-    },
-    {
-      id: 4,
-      nome: "Ana Costa",
-      contato: "41997654321",
-      endereco: "Rua Central, 321 - Curitiba/PR",
-    },
-  ];
+  async function loadOverview() {
+    try {
+      const response = await API.get("/clients");
+      setClients(response.data.clients);
+      setCountClients(response.data.countClients);
+      setCountFiado(response.data.countFiado);
+      console.log(clients);
+    } catch (error: any) {
+      console.error("Erro ao buscar os clientes:", error.message);
+    }
+  }
+
+  const rows = clients.map((client) => ({
+    id: client.id,
+    nome: client.name,
+    contato: client.phone,
+    endereco: client.address,
+  }));
+
   return (
     <div>
       <header className={styles.header}>
@@ -67,7 +75,7 @@ export default function Clients() {
       <section className={styles.topBoxes}>
         <ul className={styles.boxes}>
           <li className={styles.aboutTopBox}>
-            <h1 className={styles.h1}>12</h1>
+            <h1 className={styles.h1}>{countFiado}</h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Clientes em débito</h4>
               <FaMoneyBillTrendUp className={styles.svg} size={25} />
@@ -75,7 +83,7 @@ export default function Clients() {
             <p className={styles.subtitle}>Clientes em débito com seu PDV.</p>
           </li>
           <li className={styles.aboutTopBox}>
-            <h1 className={styles.h1}>210</h1>
+            <h1 className={styles.h1}>{countClients}</h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Quantidade de clientes</h4>
               <FaListOl className={styles.svg} size={25} />
@@ -125,10 +133,7 @@ export default function Clients() {
           </div>
         </section>
         <section className={styles.listSales}>
-          <TableComponent
-            columns={columns}
-            rows={rows}
-          ></TableComponent>
+          <TableComponent columns={columns} rows={rows}></TableComponent>
         </section>
       </main>
     </div>
