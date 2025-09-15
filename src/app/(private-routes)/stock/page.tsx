@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { API } from "@/api";
 
 import StockFormComponent from "@/components/StockForm";
+import { GridRenderCellParams } from "@mui/x-data-grid";
 
 interface Product {
   id: string;
@@ -85,6 +86,57 @@ export default function Stock() {
       field: "description",
       headerName: "Descrição",
       width: 200,
+    },
+    {
+      field: "actions",
+      headerName: "Ações",
+      width: 200,
+      renderCell: (params: GridRenderCellParams) => (
+        <div
+          className="btns-action"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <button
+            className="editBtn"
+            onClick={() =>
+              console.log(`Clicou em editar no produto com o id ${params.id}`)
+            }
+            style={{
+              padding: "10px",
+              marginTop: "5px",
+              width: "35%",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #6B7280",
+              borderRadius: "6px",
+              cursor: "pointer"
+            }}
+          >
+            Editar
+          </button>
+          <button
+            className="deleteBtn"
+            onClick={() =>
+              console.log(`Clicou em deletar no produto com o id ${params.id}`)
+            }
+            style={{
+              padding: "10px",
+              marginTop: "5px",
+              width: "35%",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #EF4444",
+              borderRadius: "6px",
+              color: "#EF4444",
+              cursor: "pointer"
+            }}
+          >
+            Apagar
+          </button>
+        </div>
+      ),
     },
   ];
 
@@ -171,8 +223,8 @@ export default function Stock() {
               onSubmit={loadOverview}
               isOpen={isOpen}
               onCancel={() => {
-                setIsOpen(false)
-                loadOverview()
+                setIsOpen(false);
+                loadOverview();
               }}
             ></StockFormComponent>
           </div>

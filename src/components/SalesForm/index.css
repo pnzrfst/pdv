@@ -26,7 +26,7 @@
 
 .formBody {
   box-shadow: var(--shadow);
-  height: 800px;
+  height: 700px;
   width: 40vw;
   background-color: var(--box-bg);
   padding: 1rem;

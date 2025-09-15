@@ -154,6 +154,7 @@
   box-shadow: var(--shadow);
 }
 
+
 /* ------------------------ ANIMATION ------------------------ */
 @keyframes slideFromRight {
   0% {
