@@ -1,30 +1,62 @@
-import { Box, Modal, TextField } from "@mui/material";
+import { API } from "@/api";
+import {Modal, TextField } from "@mui/material";
 import { useState } from "react";
 
 //id,quantity,cost,price,description
 
 interface editModalProps {
   id: string;
-  handleOpen: () => void;
-  handleClose: () => void;
+  onSubmit: () => void;
+  onCancel: () => void;
+  isOpen: boolean;
+}
+
+interface Product {
+  id: string;
+  quantity?: number;
+  cost?: number;
+  price?: number;
+  description?: string;
 }
 
 export default function EditModal({
   id,
-  handleClose,
-  handleOpen,
-}: editModalProps) {
-  const [open, setIsOpen] = useState<boolean>(false);
+  isOpen,
+  onSubmit,
+  onCancel
 
+}: editModalProps) {
   const [quantity, setQuantity] = useState<number>(0);
   const [cost, setCost] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
 
+  async function handlePatchProduct(
+    event: React.FormEvent,
+     id : string
+  ) {
+    event.preventDefault();
+
+    const patchedProduct: Product = {
+      id,
+      cost,
+      price,
+      description,
+    };
+
+    try {
+      await API.patch(`/products/:${id}`, patchedProduct);
+      console.log(`Produto com id: ${id} atualizado.`);
+    } catch (error: any) {
+      console.log(error.message);
+      console.error(error);
+    }
+  }
+
   return (
     <div>
-      <Modal open={open} onClose={() => setIsOpen(false)}>
-        <Box>
+      <Modal open={isOpen} onClose={onCancel}>
+        <form onSubmit={(event) => handlePatchProduct(event, id)}>
           <TextField
             type="number"
             placeholder="quantidade"
@@ -49,7 +81,9 @@ export default function EditModal({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></TextField>
-        </Box>
+
+          <button type = "submit">Salvar</button>
+        </form>
       </Modal>
     </div>
   );

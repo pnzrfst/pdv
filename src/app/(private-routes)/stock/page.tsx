@@ -7,6 +7,7 @@ import { API } from "@/api";
 
 import StockFormComponent from "@/components/StockForm";
 import { GridRenderCellParams } from "@mui/x-data-grid";
+import EditModal from "@/components/EditModal";
 
 interface Product {
   id: string;
@@ -20,6 +21,9 @@ interface Product {
 }
 
 export default function Stock() {
+  const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const [selectedProduct, setSelectedProdut] = useState<string>("");
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [stockValue, setStockValue] = useState<number>(0);
@@ -102,8 +106,11 @@ export default function Stock() {
         >
           <button
             className="editBtn"
-            onClick={() =>
-              console.log(`Clicou em editar no produto com o id ${params.id}`)
+            onClick={() => {
+                console.log(`Clicou em editar no produto com o id ${params.id}`)
+                setSelectedProdut(String(params.id));
+                setEditModalOpen(true);
+              }
             }
             style={{
               padding: "10px",
@@ -120,7 +127,7 @@ export default function Stock() {
           <button
             className="deleteBtn"
             onClick={() =>
-              console.log(`Clicou em deletar no produto com o id ${params.id}`)
+              console.log("poi")
             }
             style={{
               padding: "10px",
@@ -230,6 +237,18 @@ export default function Stock() {
           </div>
         </section>
         <section className={styles.listStock}>
+          <EditModal
+            id={selectedProduct ?? ""}
+            isOpen= {editModalOpen}
+            onSubmit={() => {
+              setEditModalOpen(false);
+              loadOverview()
+            }}
+            onCancel={ () => 
+              loadOverview()
+            }
+          
+          />
           <TableComponent columns={columns} rows={rows}></TableComponent>
         </section>
       </main>
