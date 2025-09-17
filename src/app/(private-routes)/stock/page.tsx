@@ -97,21 +97,21 @@ export default function Stock() {
       width: 200,
       renderCell: (params: GridRenderCellParams) => (
         <div
-          className="btns-action"
+          className="btnsAction"
           style={{
             display: "flex",
             alignItems: "center",
+            width: "200px",
             justifyContent: "space-evenly",
           }}
         >
           <button
             className="editBtn"
             onClick={() => {
-                console.log(`Clicou em editar no produto com o id ${params.id}`)
-                setSelectedProdut(String(params.id));
-                setEditModalOpen(true);
-              }
-            }
+              console.log(`Clicou em editar no produto com o id ${params.id}`);
+              setSelectedProdut(String(params.id));
+              setEditModalOpen(true);
+            }}
             style={{
               padding: "10px",
               marginTop: "5px",
@@ -119,16 +119,14 @@ export default function Stock() {
               backgroundColor: "#FFFFFF",
               border: "1px solid #6B7280",
               borderRadius: "6px",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
             Editar
           </button>
           <button
             className="deleteBtn"
-            onClick={() =>
-              console.log("poi")
-            }
+            onClick={() => console.log("poi")}
             style={{
               padding: "10px",
               marginTop: "5px",
@@ -137,7 +135,7 @@ export default function Stock() {
               border: "1px solid #EF4444",
               borderRadius: "6px",
               color: "#EF4444",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
             Apagar
@@ -238,16 +236,17 @@ export default function Stock() {
         </section>
         <section className={styles.listStock}>
           <EditModal
+            selectedId={selectedProduct}
             id={selectedProduct ?? ""}
-            isOpen= {editModalOpen}
+            isOpen={editModalOpen}
             onSubmit={() => {
               setEditModalOpen(false);
-              loadOverview()
+              loadOverview();
             }}
-            onCancel={ () => 
-              loadOverview()
-            }
-          
+            onCancel={() => {
+              setEditModalOpen(false);
+              loadOverview();
+            }}
           />
           <TableComponent columns={columns} rows={rows}></TableComponent>
         </section>
