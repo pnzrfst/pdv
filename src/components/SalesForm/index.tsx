@@ -142,6 +142,13 @@ export default function SalesFormComponent({
     }
   }
 
+  useEffect(() => {
+    const total = selectedProducts.reduce(
+      (acc, p) => acc + (p.saleQuantity ?? 0) * p.price,
+      0
+    );
+    setPrice(total);
+  }, [selectedProducts]);
   if (!isOpen) return null;
 
   return (
@@ -201,10 +208,12 @@ export default function SalesFormComponent({
               selectedProducts.map((product) => (
                 <span key={product.id} className="selectedProduct">
                   <p> {product.name}</p>
+                  <p>{product.quantity}</p>
                   <input
+                    key={product.id}
                     id="selectQuantity"
                     type="number"
-                    value={product.saleQuantity ?? 0}
+                    value={product.saleQuantity ?? ""}
                     onChange={(e) => {
                       const value = Number(e.target.value);
                       setSelectedProducts((prev) =>
@@ -214,12 +223,6 @@ export default function SalesFormComponent({
                             : p
                         )
                       );
-                      const total = selectedProducts.reduce(
-                        (acc, p) => acc + (p.saleQuantity ?? 1) * p.price,
-                        0
-                      );
-                      setPrice(total);
-                      
                     }}
                   />
                 </span>

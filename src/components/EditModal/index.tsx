@@ -25,6 +25,7 @@ export default function EditModal({
   isOpen,
   selectedId,
   onCancel,
+  onSubmit,
 }: editModalProps) {
   console.log(selectedId);
   const [quantity, setQuantity] = useState<number>(0);
@@ -44,7 +45,7 @@ export default function EditModal({
     };
 
     try {
-      await API.patch(`/products/:${id}`, patchedProduct);
+      await API.patch(`/products/${id}`, patchedProduct);
       console.log(`Produto com id: ${id} atualizado.`);
     } catch (error: any) {
       console.log(error.message);
@@ -84,7 +85,10 @@ export default function EditModal({
       <Modal className="modalBody" open={isOpen} onClose={onCancel}>
         <form
           className="formBody"
-          onSubmit={(event) => handlePatchProduct(event, id)}
+          onSubmit={async(event) => {
+            await handlePatchProduct(event, id);
+            onSubmit();
+          }}
         >
           <h1>Editar produto</h1>
           <p>Edite as informações do produto selecionado.</p>
