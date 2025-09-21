@@ -47,12 +47,13 @@ export default function Clients() {
     },
   ];
 
+
   async function loadOverview() {
     try {
       const response = await API.get("/clients");
       setClients(response.data.clients);
       setCountClients(response.data.countClients);
-      setCountFiado(response.data.countFiado);
+      setCountFiado(response.data.filteredByFiado);
       console.log(clients);
     } catch (error: any) {
       console.error("Erro ao buscar os clientes:", error.message);
@@ -120,7 +121,10 @@ export default function Clients() {
             <ClientsForm
               title="Cadastrar cliente"
               subtitle="Insira as informações e cadastre um cliente."
-              onSubmit={() => console.log("oi")}
+              onSubmit={() => {
+                loadOverview()
+                setIsOpen(false)
+              }}
               isOpen={isOpen}
               onCancel={() => setIsOpen(!isOpen)}
             ></ClientsForm>
