@@ -1,13 +1,13 @@
-
 :root {
-  --primary-color: #1F2937;
-  --secondary-color: #4B5563;
-  --accent-color: #3B82F6;
-  --bg-color: #F9FAFB;
-  --box-bg: #FFFFFF;
+  --primary-color: #1f2937;
+  --secondary-color: #4b5563;
+  --accent-color: #3b82f6;
+  --bg-color: #f9fafb;
+  --box-bg: #ffffff;
   --text-dark: #111827;
-  --text-light: #6B7280;
+  --text-light: #6b7280;
   --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  --shadow-dark: rgba(0, 0, 0, 0.05) 1px 8px 12px;
   --radius: 6px;
   --transition: 0.3s ease-in-out;
 }
@@ -25,7 +25,6 @@
 .header p {
   font-weight: lighter;
 }
-
 
 .mainContent {
   flex: 1;
@@ -48,6 +47,7 @@
 .boxes .headerBox {
   display: flex;
   gap: 1rem;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 4px;
 }
@@ -73,14 +73,96 @@
   list-style: none;
   width: 100%;
   height: auto;
-  margin-bottom: 1rem;
   gap: 1rem;
 }
 
-.mainBoxesCards .aboutMainBox {
-  background-color: var(--box-bg);
+.aboutMainBox {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  background-color: var(--bg-color);
   box-shadow: var(--shadow);
   border-radius: 12px;
+}
+
+.aboutMainBox .headerBox {
+  margin-bottom: 2rem;
   padding: 2rem;
+  width: 100%;
+  height: 50%;
+  background-color: var(--secondary-color);
+  border-radius: var(--radius);
+}
+
+.aboutMainBox .headerBox h2 {
+  color: var(--box-bg);
+  text-align: left;
+  font-size: 24px;
+}
+
+.listStock {
   display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.listStock .infosStock {
+  padding: 1rem;
+}
+
+.listStock .stockCards {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--box-bg);
+  margin-bottom: 8px;
+  align-items: center;
+  padding: 8px;
+  height: 3rem;
+  box-shadow: var(--shadow-dark);
+  
+  & p, strong {
+    color: var(--text-dark);
+  }
+}
+
+.stockCards button {
+  width: 30%;
+  padding: 8px;
+  background-color: var(--box-bg);
+  border: 1px solid var(--text-dark);
+  border-radius: var(--radius);
+  color: var(--text-dark);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.clientsActions,
+.stockActions,
+.incomeActions,
+.salesActions {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.clientsActions button,
+.stockActions button,
+.incomeActions button,
+.salesActions button {
+  padding: 8px;
+  background-color: var(--box-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--text-dark);
+  color: var(--text-dark);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.clientsActions button:hover,
+.stockActions button:hover,
+.incomeActions button:hover,
+.salesActions button:hover {
+  opacity: 80%;
 }
