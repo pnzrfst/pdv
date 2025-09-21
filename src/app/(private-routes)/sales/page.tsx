@@ -23,6 +23,7 @@ export default function Sales() {
     loadOverview();
   }, []);
 
+  const [totalEarnedToday, setTodayEarnedToday] = useState<number>(0);
   const [sales, setSales] = useState<Sales[]>([]);
   const [totalSales, setTotalSales] = useState<number>(0);
   const [averageTicket, setAverageTicket] = useState<number>(0);
@@ -67,6 +68,7 @@ export default function Sales() {
       setSales(response.data.sales);
       setTotalSales(response.data.countSales);
       setAverageTicket(response.data.averageTicket);
+      setTodayEarnedToday(response.data.totalEarnedToday)
     } catch (error) {
       console.error("Erro ao buscar as vendas:", error);
     }
@@ -96,13 +98,13 @@ export default function Sales() {
       <section className={styles.topBoxes}>
         <ul className={styles.boxes}>
           <li className={styles.aboutTopBox}>
-            <h1 className={styles.h1}>R$ 1200,00</h1>
+            <h1 className={styles.h1}>R${totalEarnedToday.toFixed(2) ?? 0}</h1>
             <div className={styles.headerBox}>
               <h4 className={styles.h4}>Ganhos no dia de hoje.</h4>
               <FaMoneyBillTrendUp className={styles.svg} size={25} />
             </div>
             <p className={styles.subtitle}>
-              Total ganho pelas vendas no dia de hoje:.
+              Total ganho pelas vendas no dia de hoje.
             </p>
           </li>
           <li className={styles.aboutTopBox}>
