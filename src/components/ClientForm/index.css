@@ -1,0 +1,85 @@
+:root {
+  --primary-color: #1f2937;
+  --secondary-color: #4b5563;
+  --accent-color: #3b82f6;
+  --bg-color: #f9fafb;
+  --box-bg: #ffffff;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  --radius: 6px;
+  --transition: 0.3s ease-in-out;
+}
+
+.formBody {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: var(--box-bg);
+  margin-top: 2rem;
+  height: 90vh;
+  width: 50vw;
+  padding: 2rem;
+}
+
+.formBody h1 {
+  font-size: 24px;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.formBody p {
+  font-size: 18px;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+}
+
+.formBody .inputArea {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  gap: 2rem;
+}
+
+.inputArea .inputItem {
+  border-radius: var(--radius);
+  background-color: var(--box-bg);
+  outline: none;
+}
+
+.formBody .btns-action {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btns-action button {
+  height: 60px;
+  border-radius: var(--radius);
+  background-color: var(--secondary-color);
+  color: var(--box-bg);
+  width: 200px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.btns-action #saveButton {
+  background-color: var(--secondary-color);
+  color: var(--box-bg);
+}
+
+
+.btns-action #cancelButton {
+  background-color: var(--box-bg);
+  color: var(--text-dark);
+  border: 1px solid var(--text-light);
+}
+
+
+.btns-action #cancelButton:hover {
+  background-color: var(--bg-color);
+}
+
+.btns-action #saveButton:hover {
+  opacity: 80%;
+}
