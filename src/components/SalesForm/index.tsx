@@ -48,7 +48,7 @@ interface SaleProduct {
 interface Sale {
   products: SaleProduct[];
   client_id: string;
-  isFiado: boolean;
+  is_fiado: boolean;
   payment_method: PaymentMethod;
 }
 
@@ -129,7 +129,7 @@ export default function SalesFormComponent({
     const saleData: Sale = {
       products: mappedProducts,
       client_id: selectedClient,
-      isFiado: payment === "FIADO",
+      is_fiado: payment === "FIADO" ? true : false,
       payment_method: payment as PaymentMethod,
     };
 
