@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { BsBox } from "react-icons/bs";
@@ -7,38 +7,41 @@ import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlinePointOfSale } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { API } from "@/api";
-import { Card, List} from "@mui/material";
+import { Card, List } from "@mui/material";
 
-interface biggerStock {
-  name: string
+interface stockTemplate {
+  name: string;
 }
-
-interface lowerStock {
-  name: string
-}
-
 
 export default function Home() {
-  const router = useRouter() 
+  const router = useRouter();
 
   const [lowStockProducts, setLowStockProducts] = useState<number>(0);
-  const [biggerStock, setBiggerStock] = useState<biggerStock>({name: ""})
-  const [lowerStock, setLowerStock] = useState<biggerStock>({name: ""})
+  const [biggerStock, setBiggerStock] = useState<stockTemplate>({ name: "" });
+  const [lowerStock, setLowerStock] = useState<stockTemplate>({ name: "" });
 
-  async function handleStockOverview(){
+  async function handleStockOverview() {
     try {
-      const response = await API.get("/home-summary");
+      const response = await API.get("/product-summary");
       setLowStockProducts(response.data.lowStockProducts);
-      setLowerStock(response.data.lowerStock)
-      setBiggerStock(response.data.biggerStock)
+      setLowerStock(response.data.lowerStock);
+      setBiggerStock(response.data.biggerStock);
     } catch (error) {
       console.error(error);
     }
   }
 
+  async function handleSalesOverview() {
+    try {
+      const response = await API.get("/")
+    } catch (error) {
+      
+    }
+  }
+
   useEffect(() => {
-    handleStockOverview()
-  }, [])
+    handleStockOverview();
+  }, []);
   return (
     <div>
       <header className={styles.header}>
@@ -50,29 +53,13 @@ export default function Home() {
           <ul className={styles.boxes}>
             <li className={styles.aboutTopBox}>
               <div className={styles.headerBox}>
-                <h2>Clientes</h2>
-                <IoHomeOutline size={20}/>
-              </div>
-              <span className={styles.clientsActions}>
-                <button onClick={() => router.push('/clients')}>Cadastrar novo cliente</button>
-              </span>
-            </li>
-            <li className={styles.aboutTopBox}>
-              <div className={styles.headerBox}>
                 <h2>Estoque</h2>
-                <BsBox size={20}/>
+                <BsBox size={20} />
               </div>
               <span className={styles.stockActions}>
-                  <button onClick={() => router.push('/stock')}>Cadastrar novo produto</button>
-              </span>
-            </li>
-            <li className={styles.aboutTopBox}>
-              <div className={styles.headerBox}>
-                <h2>Faturamento</h2>
-                <FaMoneyBill1Wave size={25} />
-              </div>
-              <span className={styles.incomeActions}>
-                <button onClick={() => router.push('/income')}>Ir para faturamento</button>
+                <button onClick={() => router.push("/stock")}>
+                  Cadastrar novo produto
+                </button>
               </span>
             </li>
             <li className={styles.aboutTopBox}>
@@ -81,7 +68,31 @@ export default function Home() {
                 <MdOutlinePointOfSale size={25} />
               </div>
               <span className={styles.salesActions}>
-                <button  onClick={() => router.push('/sales')}>Cadastrar nova venda</button>
+                <button onClick={() => router.push("/sales")}>
+                  Cadastrar nova venda
+                </button>
+              </span>
+            </li>
+            <li className={styles.aboutTopBox}>
+              <div className={styles.headerBox}>
+                <h2>Faturamento</h2>
+                <FaMoneyBill1Wave size={25} />
+              </div>
+              <span className={styles.incomeActions}>
+                <button onClick={() => router.push("/income")}>
+                  Ir para faturamento
+                </button>
+              </span>
+            </li>
+            <li className={styles.aboutTopBox}>
+              <div className={styles.headerBox}>
+                <h2>Clientes</h2>
+                <IoHomeOutline size={20} />
+              </div>
+              <span className={styles.clientsActions}>
+                <button onClick={() => router.push("/clients")}>
+                  Cadastrar novo cliente
+                </button>
               </span>
             </li>
           </ul>
@@ -93,38 +104,111 @@ export default function Home() {
                 <h2>Estoque</h2>
               </div>
               <List className={styles.listStock}>
-               <div className={styles.infosStock}>
-                 <Card className={styles.stockCards}>
-                  <p>Temos  <strong>{lowStockProducts}</strong> produtos com estoque baixo</p>
-                  <button>Ir</button>
-                 </Card>
-                 <Card className={styles.stockCards}>
-                  <p>O produto: <strong>{biggerStock.name}</strong> é o de maior estoque em seu pdv.</p>
-                 </Card>
-                 <Card className={styles.stockCards}>
-                  <p>O produto: <strong>{lowerStock.name}</strong> é o de menor estoque em seu pdv.</p>
-                 </Card>
-               </div>
+                <div className={styles.infosStock}>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      Temos <strong>{lowStockProducts}</strong> produtos com
+                      estoque baixo
+                    </p>
+                    <button onClick={() => router.push("/sales")}>Ir</button>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{biggerStock.name}</strong> é o de
+                      maior estoque em seu pdv.
+                    </p>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{lowerStock.name}</strong> é o de menor
+                      estoque em seu pdv.
+                    </p>
+                  </Card>
+                </div>
+              </List>
+            </li>{" "}
+            <li className={styles.aboutMainBox}>
+              <div className={styles.headerBox}>
+                <h2>Vendas</h2>
+              </div>
+              <List className={styles.listStock}>
+                <div className={styles.infosStock}>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      Ontem registramos <strong>{lowStockProducts}</strong> vendas
+                    </p>
+                    <button onClick={() => router.push("/sales")}>Ir</button>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{biggerStock.name}</strong> é o de
+                      maior estoque em seu pdv.
+                    </p>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{lowerStock.name}</strong> é o de menor
+                      estoque em seu pdv.
+                    </p>
+                  </Card>
+                </div>
               </List>
             </li>
             <li className={styles.aboutMainBox}>
               <div className={styles.headerBox}>
-                <h2>Teste de box</h2>
-                
+                <h2>Estoque</h2>
               </div>
- 
+              <List className={styles.listStock}>
+                <div className={styles.infosStock}>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      Temos <strong>{lowStockProducts}</strong> produtos com
+                      estoque baixo
+                    </p>
+                    <button onClick={() => router.push("/sales")}>Ir</button>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{biggerStock.name}</strong> é o de
+                      maior estoque em seu pdv.
+                    </p>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{lowerStock.name}</strong> é o de menor
+                      estoque em seu pdv.
+                    </p>
+                  </Card>
+                </div>
+              </List>
             </li>
             <li className={styles.aboutMainBox}>
               <div className={styles.headerBox}>
-                <h2>Teste de box</h2>
-                
+                <h2>Estoque</h2>
               </div>
-            </li>
-            <li className={styles.aboutMainBox}>
-              <div className={styles.headerBox}>
-                <h2>Teste de box</h2>
-                
-              </div>
+              <List className={styles.listStock}>
+                <div className={styles.infosStock}>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      Temos <strong>{lowStockProducts}</strong> produtos com
+                      estoque baixo
+                    </p>
+                    <button onClick={() => router.push("/sales")}>Ir</button>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{biggerStock.name}</strong> é o de
+                      maior estoque em seu pdv.
+                    </p>
+                  </Card>
+                  <Card className={styles.stockCards}>
+                    <p>
+                      O produto: <strong>{lowerStock.name}</strong> é o de menor
+                      estoque em seu pdv.
+                    </p>
+                  </Card>
+                </div>
+              </List>
             </li>
           </ul>
         </section>
