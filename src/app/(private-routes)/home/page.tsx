@@ -13,12 +13,22 @@ interface stockTemplate {
   name: string;
 }
 
+interface PaymentMethod {
+  name: string;
+  acc: number;
+}
+
 export default function Home() {
   const router = useRouter();
 
+  //controlar os dashboards de stock
   const [lowStockProducts, setLowStockProducts] = useState<number>(0);
   const [biggerStock, setBiggerStock] = useState<stockTemplate>({ name: "" });
   const [lowerStock, setLowerStock] = useState<stockTemplate>({ name: "" });
+  
+  //controlar os dashboards de vendas
+  const [mostUsedMethod, setMostUsedMethod] = useState<PaymentMethod>({name: "", acc: 0 });
+  const [fiadoSales, setFiadoSales] = useState<number>(0);
 
   async function handleStockOverview() {
     try {
@@ -33,7 +43,9 @@ export default function Home() {
 
   async function handleSalesOverview() {
     try {
-      const response = await API.get("/")
+      const response = await API.get("/sales-summary");
+      setMostUsedMethod(response.data.mostUsedMethod);
+      setFiadoSales(response.data.fiadoSales);
     } catch (error) {
       
     }
@@ -41,6 +53,7 @@ export default function Home() {
 
   useEffect(() => {
     handleStockOverview();
+     handleSalesOverview();
   }, []);
   return (
     <div>
@@ -126,7 +139,7 @@ export default function Home() {
                   </Card>
                 </div>
               </List>
-            </li>{" "}
+            </li>
             <li className={styles.aboutMainBox}>
               <div className={styles.headerBox}>
                 <h2>Vendas</h2>
@@ -141,14 +154,12 @@ export default function Home() {
                   </Card>
                   <Card className={styles.stockCards}>
                     <p>
-                      O produto: <strong>{biggerStock.name}</strong> é o de
-                      maior estoque em seu pdv.
+                     Você possui <strong>{fiadoSales}</strong> venda(s) fiadas registradas. Atenção!
                     </p>
                   </Card>
                   <Card className={styles.stockCards}>
                     <p>
-                      O produto: <strong>{lowerStock.name}</strong> é o de menor
-                      estoque em seu pdv.
+                      {/* O método de pagamento <strong>{mostUsedMethod.acc}</strong> foi o mais usado em seu pdv. */}
                     </p>
                   </Card>
                 </div>
