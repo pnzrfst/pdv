@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import SalesFormComponent from "@/components/SalesForm";
 import { API } from "@/api";
+import { GridPaginationModel } from "@mui/x-data-grid";
 
 interface Sales {
   id: string;
@@ -22,7 +23,14 @@ export default function Sales() {
   useEffect(() => {
     loadOverview();
   }, []);
+  //controlar o pagination
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 10,
+  });
+  const [rowCount, setRowCount] = useState<number>(1);
 
+  //controlar os
   const [totalEarnedToday, setTodayEarnedToday] = useState<number>(0);
   const [sales, setSales] = useState<Sales[]>([]);
   const [totalSales, setTotalSales] = useState<number>(0);
@@ -62,13 +70,16 @@ export default function Sales() {
     },
   ];
 
-  async function loadOverview() {
+  async function loadOverview(page = 1, pageSize = 10) {
     try {
-      const response = await API.get("/sales");
+      const response = await API.get("/sales", {
+        params: { page, pageSize },
+      });
       setSales(response.data.sales);
-      setTotalSales(response.data.countSales);
+      setTotalSales(response.data.countTotalSales);
+      setRowCount(response.data.countTotalSales);
       setAverageTicket(response.data.averageTicket);
-      setTodayEarnedToday(response.data.totalEarnedToday)
+      setTodayEarnedToday(response.data.totalEarnedToday);
     } catch (error) {
       console.error("Erro ao buscar as vendas:", error);
     }
@@ -167,7 +178,16 @@ export default function Sales() {
           </div>
         </section>
         <section className={styles.listSales}>
-          <TableComponent columns={columns} rows={rows}></TableComponent>
+          <TableComponent
+            rowCount={rowCount}
+            columns={columns}
+            rows={rows}
+            paginationModel={paginationModel}
+            onPaginationModelChange={(model) => {
+              setPaginationModel(model);
+              loadOverview(model.page + 1, model.pageSize);
+            }}
+          />
         </section>
       </main>
     </div>
