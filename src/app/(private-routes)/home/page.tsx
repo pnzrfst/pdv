@@ -44,10 +44,11 @@ export default function Home() {
   async function handleSalesOverview() {
     try {
       const response = await API.get("/sales-summary");
+      console.log(mostUsedMethod);
       setMostUsedMethod(response.data.mostUsedMethod);
       setFiadoSales(response.data.fiadoSales);
     } catch (error) {
-      
+      console.log(error)
     }
   }
 
@@ -159,7 +160,7 @@ export default function Home() {
                   </Card>
                   <Card className={styles.stockCards}>
                     <p>
-                      {/* O método de pagamento <strong>{mostUsedMethod.acc}</strong> foi o mais usado em seu pdv. */}
+                      O método de pagamento <strong>{mostUsedMethod.name.toLowerCase()}</strong> foi o mais usado em seu pdv, com {mostUsedMethod.acc} registros.
                     </p>
                   </Card>
                 </div>
