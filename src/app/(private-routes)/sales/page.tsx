@@ -31,7 +31,7 @@ export default function Sales() {
   const [rowCount, setRowCount] = useState<number>(1);
 
   //controlar os
-  const [totalEarnedToday, setTodayEarnedToday] = useState<number>(0);
+  const [totalEarnedToday, setTotalEarnedToday] = useState<number>(0);
   const [sales, setSales] = useState<Sales[]>([]);
   const [totalSales, setTotalSales] = useState<number>(0);
   const [averageTicket, setAverageTicket] = useState<number>(0);
@@ -79,7 +79,7 @@ export default function Sales() {
       setTotalSales(response.data.countTotalSales);
       setRowCount(response.data.countTotalSales);
       setAverageTicket(response.data.averageTicket);
-      setTodayEarnedToday(response.data.totalEarnedToday);
+      setTotalEarnedToday(response.data.totalEarnedToday);
     } catch (error) {
       console.error("Erro ao buscar as vendas:", error);
     }

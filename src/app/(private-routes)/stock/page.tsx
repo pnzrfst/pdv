@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { API } from "@/api";
 
 import StockFormComponent from "@/components/StockForm";
-import { GridRenderCellParams } from "@mui/x-data-grid";
+import { GridPaginationModel, GridRenderCellParams } from "@mui/x-data-grid";
 import EditModal from "@/components/EditModal";
 
 interface Product {
@@ -21,6 +21,13 @@ interface Product {
 }
 
 export default function Stock() {
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 10,
+  });
+  const [rowCount, setRowCount] = useState<number>(1);
+
+  
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [selectedProduct, setSelectedProdut] = useState<string>("");
 
@@ -44,12 +51,16 @@ export default function Stock() {
     }
   }
 
-  async function loadOverview() {
+  async function loadOverview(page = 1, pageSize = 10) {
     try {
-      const response = await API.get("/products");
+      const response = await API.get("/products", {
+        params: {page, pageSize}
+      });
+      console.log(response)
       setProducts(response.data.products);
       setStockValue(response.data.stockValue);
       setTotalProductsInStock(response.data.totalProducts);
+      setRowCount(response.data.totalPages)
     } catch (error) {
       console.error("Erro ao buscar os produtos:", error);
     }
@@ -248,7 +259,16 @@ export default function Stock() {
               loadOverview();
             }}
           />
-          <TableComponent columns={columns} rows={rows}></TableComponent>
+          <TableComponent
+            rowCount={rowCount}
+            columns={columns}
+            rows={rows}
+            paginationModel={paginationModel}
+            onPaginationModelChange={(model) => {
+              setPaginationModel(model);
+              loadOverview(model.page + 1, model.pageSize);
+            }}
+          ></TableComponent>
         </section>
       </main>
     </div>

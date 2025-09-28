@@ -7,6 +7,7 @@ import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import ClientsForm from "@/components/ClientForm";
 import { API } from "@/api";
+import { GridPaginationModel } from "@mui/x-data-grid";
 
 interface Clients {
   id: string;
@@ -20,8 +21,14 @@ export default function Clients() {
     loadOverview();
   }, []);
 
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 10,
+  });
+  const [rowCount, setRowCount] = useState<number>(1);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [countClients, setCountClients] = useState<number>(0);  
+  const [countClients, setCountClients] = useState<number>(0);
   const [countFiado, setCountFiado] = useState<number>(0);
   const [clients, setClients] = useState<Clients[]>([]);
   const columns = [
@@ -47,10 +54,11 @@ export default function Clients() {
     },
   ];
 
-
-  async function loadOverview() {
+  async function loadOverview(page = 1, pageSize = 10) {
     try {
-      const response = await API.get("/clients");
+      const response = await API.get("/clients", {
+        params: {page, pageSize}
+      });
       setClients(response.data.clients);
       setCountClients(response.data.countClients);
       setCountFiado(response.data.filteredByFiado);
@@ -122,8 +130,8 @@ export default function Clients() {
               title="Cadastrar cliente"
               subtitle="Insira as informações e cadastre um cliente."
               onSubmit={() => {
-                loadOverview()
-                setIsOpen(false)
+                loadOverview();
+                setIsOpen(false);
               }}
               isOpen={isOpen}
               onCancel={() => setIsOpen(!isOpen)}
@@ -137,7 +145,16 @@ export default function Clients() {
           </div>
         </section>
         <section className={styles.listSales}>
-          <TableComponent columns={columns} rows={rows}></TableComponent>
+          <TableComponent
+            rowCount={rowCount}
+            columns={columns}
+            rows={rows}
+            paginationModel={paginationModel}
+            onPaginationModelChange={(model) => {
+              setPaginationModel(model);
+              loadOverview(model.page + 1, model.pageSize);
+            }}
+          ></TableComponent>
         </section>
       </main>
     </div>
