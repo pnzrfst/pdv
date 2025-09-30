@@ -1,6 +1,14 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-color: #1f2937;
+  --secondary-color: #4b5563;
+  --bg-color: #F8F9FA;
+  --box-bg: #ffffff;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  --shadow-dark: rgba(0, 0, 0, 0.05) 1px 8px 12px;
+  --radius: 6px;
+  --transition: 0.3s ease-in-out;
 }
 
 @media (prefers-color-scheme: dark) {

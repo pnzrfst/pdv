@@ -127,6 +127,7 @@ export default function Stock() {
               padding: "10px",
               marginTop: "5px",
               width: "35%",
+              color: "#111827",
               backgroundColor: "#FFFFFF",
               border: "1px solid #6B7280",
               borderRadius: "6px",

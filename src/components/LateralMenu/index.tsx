@@ -16,25 +16,25 @@ export default function LateralMenu() {
     <div className="menuContainer">
       <ul className="menu">
         <li className="menuItem" onClick={() => router.push('/')}> 
-          <IoHomeOutline color="#111827" />
+          <IoHomeOutline color="#111827" fontSize={18}/>
           <p>Página principal</p>
         </li>
         <li className="menuItem" onClick={() => router.push('/stock')}>
-          <BsBox color="#111827" />
+          <BsBox color="#111827"  fontSize={18}/>
           <p>Estoque</p>
         </li>
 
         <li className="menuItem" onClick={() => router.push('/sales')}>
-          <MdOutlinePointOfSale color="#111827" />
+          <MdOutlinePointOfSale color="#111827"  fontSize={18}/>
           <p>Vendas</p>
         </li>
 
         <li className="menuItem" onClick={() => router.push('/income')}>
-          <FaMoneyBill1Wave color="#111827" />
+          <FaMoneyBill1Wave color="#111827"  fontSize={18}/>
           <p>Faturamento</p>
         </li>
         <li className="menuItem" onClick={() => router.push('/clients')}>
-          <FaUser color="#111827" />
+          <FaUser color="#111827" fontSize={18}/>
           <p>Clientes</p>
         </li>
       </ul>

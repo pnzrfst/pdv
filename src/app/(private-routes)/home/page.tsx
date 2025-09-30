@@ -68,7 +68,7 @@ export default function Home() {
             <li className={styles.aboutTopBox}>
               <div className={styles.headerBox}>
                 <h2>Estoque</h2>
-                <BsBox size={20} />
+                <BsBox color="#111827" size={20} />
               </div>
               <span className={styles.stockActions}>
                 <button onClick={() => router.push("/stock")}>
@@ -79,7 +79,7 @@ export default function Home() {
             <li className={styles.aboutTopBox}>
               <div className={styles.headerBox}>
                 <h2>Vendas</h2>
-                <MdOutlinePointOfSale size={25} />
+                <MdOutlinePointOfSale color="#111827" size={25} />
               </div>
               <span className={styles.salesActions}>
                 <button onClick={() => router.push("/sales")}>
@@ -90,7 +90,7 @@ export default function Home() {
             <li className={styles.aboutTopBox}>
               <div className={styles.headerBox}>
                 <h2>Faturamento</h2>
-                <FaMoneyBill1Wave size={25} />
+                <FaMoneyBill1Wave color="#111827" size={25} />
               </div>
               <span className={styles.incomeActions}>
                 <button onClick={() => router.push("/income")}>
@@ -101,7 +101,7 @@ export default function Home() {
             <li className={styles.aboutTopBox}>
               <div className={styles.headerBox}>
                 <h2>Clientes</h2>
-                <IoHomeOutline size={20} />
+                <IoHomeOutline color="#111827" size={20} />
               </div>
               <span className={styles.clientsActions}>
                 <button onClick={() => router.push("/clients")}>

@@ -121,6 +121,7 @@
 .btnsAction #cancelButton {
   background-color: var(--box-bg);
   border: 1px solid var(--text-light);
+  color: var(--text-dark);
 }
 
 .btnsAction #cancelButton:hover {
@@ -159,6 +160,7 @@
   padding: 1rem;
   width: 100%;
   align-self: center;
+  color: var(--text-dark);
   border: 1px solid var(--text-light);
   background-color: var(--bg-color);
   margin-bottom: 3rem;

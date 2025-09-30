@@ -74,6 +74,7 @@
   box-shadow: var(--shadow);
   border-radius: var(--radius);
   padding: 2rem;
+  border: 1px solid #6c757d4b;
 }
 
 .aboutTopBox .h1 {
@@ -154,9 +155,8 @@
 .graphsContainer .graph span {
   flex: 1;
   min-width: 300px;
-  background: linear-gradient(135deg, #3B82F6, #60A5FA);
   text-align: center;
-  color: #fff;
+  color: var(--text-dark);
   padding: 4rem 2rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);

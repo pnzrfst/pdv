@@ -72,6 +72,7 @@
   min-width: 300px;
   background-color: var(--box-bg);
   box-shadow: var(--shadow);
+  border: 1px solid #6c757d4b;
   border-radius: var(--radius);
   padding: 2rem;
 }
