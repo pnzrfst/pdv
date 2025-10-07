@@ -32,7 +32,7 @@ export default function Home() {
 
   async function handleStockOverview() {
     try {
-      const response = await API.get("/product-summary");
+      const response = await API.get("/product-summary",);
       setLowStockProducts(response.data.lowStockProducts);
       setLowerStock(response.data.lowerStock);
       setBiggerStock(response.data.biggerStock);

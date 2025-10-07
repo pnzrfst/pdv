@@ -1,0 +1,139 @@
+:root {
+  
+  --primary-color: #1f2937;
+  --secondary-color: #4b5563;
+  --bg-color: #f8f9fa;
+  --box-bg: #ffffff;
+
+
+  --text-dark: #111827;
+  --text-light: #6b7280;
+
+
+  --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  --shadow-dark: rgba(0, 0, 0, 0.05) 1px 8px 12px;
+  --radius: 6px;
+  --transition: 0.1s ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0a0a0a;
+    --box-bg: #1a1a1a;
+    --text-dark: #ededed;
+    --text-light: #a1a1a1;
+  }
+}
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e9ecef;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.loginPage {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.loginPage .loginArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--primary-color);
+  width: 36%;
+  padding: 2rem;
+  box-shadow: var(--shadow-dark);
+}
+
+.loginArea h1 {
+  font-size: 2.8rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.loginArea strong {
+  font-weight: 700;
+}
+
+.loginArea .form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 90%;
+}
+
+.form .input {
+  padding: 0.75rem 1rem;
+  width: 100%;
+  border: 1px solid #1f293746;
+  box-shadow: var(--shadow);
+  background-color: var(--box-bg);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: white;
+}
+
+.form .input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(31, 41, 55, 0.15);
+}
+
+.form button {
+  width: 40%;
+  align-self: flex-end;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  background-color: black;
+  border: none;
+  border-radius: var(--radius);
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form button:hover {
+  background-color: var(--secondary-color);
+}
+
+.userArea {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  font-weight: 300;
+  align-self: flex-start;
+  margin-top: 2.5rem;
+  color: var(--text-light);
+}
+
+.userArea strong {
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.backgroundImage{
+  width: 74%;
+  height: 100vh;
+  background-image: url("../images/background1.png");
+  background-size: cover;
+  background-position: center;
+}

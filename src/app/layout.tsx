@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
 
-import "./globals.css";
-import LateralMenu from "@/components/LateralMenu";
-
 export const metadata: Metadata = {
   title: "Ponto de venda",
 };
 
-export default function RootLayout({
+export default function PublicLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body>
         <div
           style={{
@@ -23,7 +20,6 @@ export default function RootLayout({
             overflow: "hidden",
           }}
         >
-          <LateralMenu />
           <div
             className="pageContent"
             style={{

@@ -7,9 +7,9 @@
 
 .menuContainer {
   display: flex;
-  background-color: #6C757D;
+  background-color:  #1f2937;
   height: 100vh;
-  color: var(--text-dark);
+  color: white;
 }
 
 .menu {
