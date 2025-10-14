@@ -18,6 +18,7 @@ interface Product {
   price: number;
   description: string;
   category_id: string;
+  category_name: string;
 }
 
 export default function Stock() {
@@ -165,7 +166,7 @@ export default function Stock() {
     cost: product.cost,
     price: product.price,
     description: product.description,
-    category_id: product.category_id,
+    category_id: product.category_name,
   }));
 
   return (

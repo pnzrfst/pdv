@@ -26,6 +26,8 @@ export default function Login() {
       const response = await API.post("users/login", user);
       const token = response.data.accessToken;
       localStorage.setItem("accessToken", token);
+      const username = response.data.user;
+      localStorage.setItem("name", username);
 
       setEmail("");
       setPassword("");

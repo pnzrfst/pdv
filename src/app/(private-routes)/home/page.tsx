@@ -20,7 +20,7 @@ interface PaymentMethod {
 
 export default function Home() {
   const router = useRouter();
-
+  const name = localStorage.getItem("name");
   //controlar os dashboards de stock
   const [lowStockProducts, setLowStockProducts] = useState<number>(0);
   const [biggerStock, setBiggerStock] = useState<stockTemplate>({ name: "" });
@@ -41,6 +41,16 @@ export default function Home() {
     }
   }
 
+  function getTodayDate(){
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.toLocaleString("pt-BR", {month: "long"}).toLowerCase();
+    const year = today.getFullYear();
+    return {day, month, year}
+  }
+
+  const {day, month, year} = getTodayDate();
+
   async function handleSalesOverview() {
     try {
       const response = await API.get("/sales-summary");
@@ -59,8 +69,8 @@ export default function Home() {
   return (
     <div>
       <header className={styles.header}>
-        <h2>Olá, usuário!</h2>
-        <p>Hoje é dia 07 de junho de 2025.</p>
+        <h2>Olá, {name}!</h2>
+        <p>Hoje é dia {day} de {month} de {year}.</p>
       </header>
       <main className="mainContent">
         <section className={styles.topBoxes}>

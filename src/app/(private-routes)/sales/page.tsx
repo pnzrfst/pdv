@@ -16,6 +16,7 @@ interface Sales {
   total: number;
   payment_method: string;
   client_id: string;
+  client_name: string
   createdAt: Date;
 }
 
@@ -60,7 +61,7 @@ export default function Sales() {
     },
     {
       field: "client_id",
-      headerName: "Cliente",
+      headerName: "Nome do cliente",
       width: 222,
     },
     {
@@ -96,7 +97,7 @@ export default function Sales() {
       currency: "BRL",
     }).format(sale.total),
     payment_method: sale.payment_method,
-    client_id: sale.client_id,
+    client_id: sale.client_name,
     products: "Ver produtos",
   }));
 
