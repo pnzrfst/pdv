@@ -5,6 +5,7 @@ import LateralMenu from "@/components/LateralMenu";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { API } from "@/api";
+import dayjs from '../utils/dayjs'
 
 export default function PrivateLayout({
   children,
