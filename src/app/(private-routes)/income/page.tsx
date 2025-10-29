@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import styles from "./page.module.css";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API } from "@/api";
 
 export default function Income() {
@@ -12,6 +12,13 @@ export default function Income() {
   const [endDate, setEndDate] = useState<dayjs.Dayjs | null>(null);
 
   const [byDateTotal, setByDateTotal] = useState<number | null>(null);
+  
+  const [boxMessage, setBoxMessage] = useState<React.ReactNode>();
+  const [entries, setEntries] = useState<string | null>(null);
+
+  useEffect(() => {
+    handleGetMonthlyIndicator();
+  })
 
   async function handleFilter() {
     if (!startDate || !endDate) return alert("Selecione as duas datas!");
@@ -31,13 +38,47 @@ export default function Income() {
     }
   }
 
+  async function handleGetMonthlyIndicator() {
+    try {
+
+      const res = await API.get(`/income/monthly_comparison`);
+      const {currentMonthTotal, previousMonthTotal} = res.data;
+
+      const formattedTotal = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(currentMonthTotal);
+
+      let message;
+
+      if(currentMonthTotal > previousMonthTotal){
+        message = <>Você teve mais entradas que o mês anterior.</>
+      }else if(currentMonthTotal === previousMonthTotal){
+        message = <>Você teve o mesmo número de entradas do mês anterior.</>
+      }else{
+        message = <>Você teve menos entradas que o mês anterior.</>
+      }
+
+      setBoxMessage(message);
+      setEntries(formattedTotal);
+
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao buscar total faturado");
+    }
+  }
+
   return (
     <div>
       <header className={styles.header}>
         <div className={styles.mainTitleArea}>
           <div className={styles.mainTitle}>
-            <h1>Total faturado: </h1>
-            <p>{byDateTotal}</p>
+            <div><h1>Total faturado: </h1>
+            <p>{new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(byDateTotal || 0)}</p></div>
+            <span className={styles.subtitle}>Total referente ao período filtrado.</span>
           </div>
           <aside className={styles.filter}>
             <div className={styles.filterContainer}>
@@ -74,11 +115,11 @@ export default function Income() {
           <li className={styles.infosBox}>
             <div className={styles.upSection}>
               <h3>Entradas:</h3>
-              <h2>R$ 12.000,00</h2>
+              <h2>{entries}</h2>
             </div>
             <div className={styles.bottomSection}>
               <p className={styles.subtitleBottomSection}>
-                Você teve o mesmo número de entradas no mês anterior!
+                {boxMessage}
               </p>
             </div>
           </li>
