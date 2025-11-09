@@ -4,6 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import styles from "./page.module.css";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { API } from "@/api";
 
@@ -15,10 +16,12 @@ export default function Income() {
   
   const [boxMessage, setBoxMessage] = useState<React.ReactNode>();
   const [entries, setEntries] = useState<string | null>(null);
+  const [currentEntriesTotal, setCurrentEntriesTotal] = useState<number | null>(null); // NOVO: Guarda o valor do mês atual como número
+  const [previousEntries, setPreviousEntries] = useState<number | null>(null);
 
   useEffect(() => {
     handleGetMonthlyIndicator();
-  })
+  }, [])
 
   async function handleFilter() {
     if (!startDate || !endDate) return alert("Selecione as duas datas!");
@@ -37,6 +40,21 @@ export default function Income() {
       alert("Erro ao buscar total faturado");
     }
   }
+
+  function handleRenderArrow(currentTotal: number | null, previousTotal: number | null) {
+   
+    if (currentTotal === null || previousTotal === null) {
+        return null;
+    }
+
+    if (currentTotal > previousTotal) {
+        return <FaArrowUp color="green" scale={10} />;
+    } else if (currentTotal < previousTotal) {
+        return <FaArrowDown color="red" scale={10} />;
+    } else {
+        return null; // Iguais (ou você pode usar um ícone de "igual")
+    }
+}
 
   async function handleGetMonthlyIndicator() {
     try {
@@ -61,7 +79,8 @@ export default function Income() {
 
       setBoxMessage(message);
       setEntries(formattedTotal);
-
+      setCurrentEntriesTotal(currentMonthTotal);
+      setPreviousEntries(previousMonthTotal);
     } catch (error) {
       console.error(error);
       alert("Erro ao buscar total faturado");
@@ -115,7 +134,8 @@ export default function Income() {
           <li className={styles.infosBox}>
             <div className={styles.upSection}>
               <h3>Entradas:</h3>
-              <h2>{entries}</h2>
+              <h2>{entries} {handleRenderArrow(currentEntriesTotal, previousEntries!)}</h2>
+              
             </div>
             <div className={styles.bottomSection}>
               <p className={styles.subtitleBottomSection}>

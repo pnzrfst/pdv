@@ -22,9 +22,7 @@ export default function PrivateLayout({
     }
 
     try {
-      const res = await API.get("/auth/validate-token", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await API.get("/auth/validate-token");
 
       setIsAuth(res.data.valid);
       return res.data.valid;

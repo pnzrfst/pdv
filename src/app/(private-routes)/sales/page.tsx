@@ -5,10 +5,10 @@ import { MdPointOfSale } from "react-icons/md";
 import { FaListOl } from "react-icons/fa6";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { useEffect, useState } from "react";
-
 import SalesFormComponent from "@/components/SalesForm";
 import { API } from "@/api";
 import { GridPaginationModel } from "@mui/x-data-grid";
+import { useRouter } from "next/navigation";
 
 interface Sales {
   id: string;
@@ -16,7 +16,7 @@ interface Sales {
   total: number;
   payment_method: string;
   client_id: string;
-  client_name: string
+  client_name: string;
   createdAt: Date;
 }
 
@@ -24,13 +24,13 @@ export default function Sales() {
   useEffect(() => {
     loadOverview();
   }, []);
+  const router = useRouter();
   //controlar o pagination
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 10,
   });
   const [rowCount, setRowCount] = useState<number>(1);
-
   //controlar os
   const [totalEarnedToday, setTotalEarnedToday] = useState<number>(0);
   const [sales, setSales] = useState<Sales[]>([]);
@@ -149,7 +149,7 @@ export default function Sales() {
         <section className={styles.recordNewSale}>
           <div className={styles.recordNewSaleContainer}>
             <div className={styles.info}>
-              <h3 className={styles.h3}>Registrar venda: </h3>
+              <h3 className={styles.h3}>Registrar venda </h3>
               <p className={styles.salesP}>Registre suas vendas.</p>
             </div>
             <button
@@ -172,10 +172,23 @@ export default function Sales() {
             ></SalesFormComponent>
           </div>
         </section>
-        <section className={styles.graphsContainer}>
-          <div className={styles.graph}>
-            <span>Gráfico aqui</span>
-            <span>Gráfico aqui</span>
+        <section className={styles.nextSteps}>
+          <div className={styles.actions}>
+              <h3 className={styles.h3}>Vá para outras páginas</h3>
+              <ul className={styles.listPages}>
+                <li className={styles.cardNextSteps}>
+                  <h4>Vendas em débito</h4>
+                  <button onClick={() => router.push("/sales/in_debit")}>{'>'}</button>
+                </li>
+                <li className={styles.cardNextSteps} >
+                  <h4 className={styles.h1}>Maiores vendas</h4>
+                  <button>{'>'}</button>
+                </li>
+                <li className={styles.cardNextSteps}>
+                  <h4 className={styles.h1}>Relatórios</h4>
+                  <button>{'>'}</button>
+                </li>
+              </ul>
           </div>
         </section>
         <section className={styles.listSales}>

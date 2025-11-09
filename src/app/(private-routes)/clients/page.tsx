@@ -62,7 +62,6 @@ export default function Clients() {
       setClients(response.data.clients);
       setCountClients(response.data.countClients);
       setCountFiado(response.data.filteredByFiado);
-      console.log(clients);
     } catch (error: any) {
       console.error("Erro ao buscar os clientes:", error.message);
     }

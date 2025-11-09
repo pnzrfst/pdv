@@ -1,11 +1,10 @@
 :root {
-  --primary-color: #1F2937;
-  --secondary-color: #4B5563;
-  --accent-color: #3B82F6;
-  --bg-color: #F9FAFB;
-  --box-bg: #FFFFFF;
+  --primary-color: #1f2937;
+  --secondary-color: #4b5563;
+  --bg-color: #f9fafb;
+  --box-bg: #ffffff;
   --text-dark: #111827;
-  --text-light: #6B7280;
+  --text-light: #6b7280;
   --shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
   --radius: 6px;
   --transition: 0.3s ease-in-out;
@@ -24,11 +23,10 @@
   margin: 2rem;
 }
 
-.header h2 {
-  font-weight: 700;
+.header h3 {
+  font-weight: lighter;
   font-size: 1.75rem;
   color: var(--primary-color);
-  margin-bottom: 0.5rem;
 }
 
 .header p {
@@ -90,6 +88,7 @@
 .p {
   color: var(--text-light);
   animation: slideFromRight 0.4s ease-out;
+  font-weight: lighter;
 }
 
 .subtitle {
@@ -103,7 +102,6 @@
   padding: 1rem 2rem;
   margin: 2rem 1rem;
   border-radius: var(--radius);
-
 }
 
 .recordNewSaleContainer {
@@ -113,13 +111,13 @@
   flex-wrap: wrap;
 }
 
-.recordNewSale h3{
+.recordNewSale .h3 {
   color: var(--primary-color);
   font-size: 1.25rem;
   font-weight: 600;
 }
 
-.recordNewSale .salesP{
+.recordNewSale .salesP {
   font-weight: 300;
   color: var(--text-light);
 }
@@ -129,7 +127,7 @@
   border: none;
   color: var(--box-bg);
   cursor: pointer;
-  padding: 0.85rem 1.50rem;
+  padding: 0.85rem 1.5rem;
   background-color: var(--primary-color);
   width: fit-content;
   transition: var(--transition);
@@ -140,31 +138,64 @@
 }
 
 /* ---------------------------- GRAPHS ---------------------------- */
-.graphsContainer {
+.nextSteps {
+  padding: 1rem 2rem;
+  margin: 2rem 1rem;
+  border-radius: var(--radius);
   margin: 1rem;
-  padding: 2rem;
+  padding: 1rem;
 }
 
-.graphsContainer .graph {
+.nextSteps .h3 {
+  color: var(--secondary-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.nextSteps .actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.nextSteps .actions .listPages {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.nextSteps .actions .cardNextSteps {
+  flex: 1;
   display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.graphsContainer .graph span {
-  flex: 1;
+  align-items: center;
   min-width: 300px;
+  height: 80px;
   text-align: center;
   color: var(--text-dark);
-  padding: 4rem 2rem;
+  padding: 1rem;
   border-radius: var(--radius);
+  background-color: var(--box-bg);
   box-shadow: var(--shadow);
-  font-weight: 600;
   font-size: 1.25rem;
   transition: var(--transition);
 }
 
+.cardNextSteps h4{
+  font-weight: lighter;
+  color: var(--text-dark);
+}
+.cardNextSteps button{
+  background-color: var(--primary-color);
+  font-size: 1.5rem;
+  width: 40px;
+  color: var(--box-bg);
+  cursor: pointer;
+  transition: var(--transition);
+}
 .graphsContainer .graph span:hover {
   transform: translateY(-4px);
 }
