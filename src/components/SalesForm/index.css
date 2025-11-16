@@ -26,8 +26,8 @@
 
 .formBody {
   box-shadow: var(--shadow);
-  height: 700px;
-  width: 40vw;
+  height: 95vh;
+  width: 50vw;
   background-color: var(--box-bg);
   padding: 1rem;
   z-index: 1000;
@@ -94,17 +94,29 @@
 .selectedProduct{
   background-color: var(--box-bg);
   display: flex;
-  justify-content: space-between;
+  text-align: justify;
+  gap: 1rem;
   align-items: first baseline;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   box-shadow: var(--shadow);
+  border-bottom: 1px solid #1118274d;
+}
+
+.selectedProduct .productsInfo{
+  justify-content: center;
+}
+
+.selectedProduct strong{
+  color: var(--secondary-color);
 }
 
 #selectQuantity{
   display: flex;
   width: 20%;
   background-color: var(--bg-color);
-  margin-top: 6px;
+  margin-top: 12  px;
   border: var(--radius);
   padding: 6px;
   color: var(--text-dark);
@@ -129,6 +141,7 @@
 
 
 .btnsAction #cancelButton {
+  color: var(--text-dark);
   background-color: var(--box-bg);
   border: 1px solid var(--text-light);
 }
@@ -139,4 +152,10 @@
 
 .btnsAction #saveButton:hover {
   opacity: 80%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

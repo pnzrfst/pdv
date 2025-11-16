@@ -35,22 +35,22 @@ export default function Clients() {
     {
       field: "id",
       headerName: "ID",
-      width: 60,
+      width: 100,
     },
     {
       field: "nome",
       headerName: "Nome",
-      width: 322,
+      width: 400,
     },
     {
       field: "contato",
       headerName: "Contato",
-      width: 322,
+      width: 400,
     },
     {
       field: "endereco",
       headerName: "Endereço",
-      width: 440,
+      width: 400,
     },
   ];
 

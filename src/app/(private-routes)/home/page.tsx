@@ -81,7 +81,7 @@ export default function Home() {
                 <BsBox color="#111827" size={20} />
               </div>
               <span className={styles.stockActions}>
-                <button onClick={() => router.push("/stock")}>
+                <button onClick={() => router.push("/stock?new_product=true")}>
                   Cadastrar novo produto
                 </button>
               </span>
@@ -92,7 +92,7 @@ export default function Home() {
                 <MdOutlinePointOfSale color="#111827" size={25} />
               </div>
               <span className={styles.salesActions}>
-                <button onClick={() => router.push("/sales")}>
+                <button onClick={() => router.push("/sales?new_sale=true")}>
                   Cadastrar nova venda
                 </button>
               </span>
@@ -114,7 +114,7 @@ export default function Home() {
                 <IoHomeOutline color="#111827" size={20} />
               </div>
               <span className={styles.clientsActions}>
-                <button onClick={() => router.push("/clients")}>
+                <button onClick={() => router.push("/clients?new_client=true")}>
                   Cadastrar novo cliente
                 </button>
               </span>

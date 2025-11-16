@@ -182,10 +182,25 @@ export default function SalesFormComponent({
             options={products.map((option) => option.name)}
             freeSolo
             onChange={(event, value) => {
-              const selected = products.filter((product) =>
+              const newlySelectedProducts = products.filter((product) =>
                 value.includes(product.name)
               );
-              setSelectedProducts(selected);
+
+              const updatedSelectedProducts = newlySelectedProducts.map(
+                (newProduct) => {
+                  const existingProduct = selectedProducts.find(
+                    (p) => p.id === newProduct.id
+                  );
+
+                  return {
+                    ...newProduct,
+                    saleQuantity: existingProduct?.saleQuantity ?? 0,
+                  };
+                }
+              );
+
+              setSelectedProducts(updatedSelectedProducts);
+              console.log(selectedProducts);
             }}
             renderValue={(value: string[]) =>
               value.map((option: string) => (
@@ -207,8 +222,14 @@ export default function SalesFormComponent({
             {selectedProducts.length ? (
               selectedProducts.map((product) => (
                 <span key={product.id} className="selectedProduct">
-                  <p> {product.name}</p>
-                  <p>{product.quantity}</p>
+                  <div className="productsInfo">
+                    <strong>Produto:</strong>
+                    <p>{product.name}</p>
+                  </div>
+                  <div className="productsInfo">
+                    <strong>Em estoque:</strong>
+                    <p>{product.quantity > 0 ? product.quantity + " un" : "Sem estoque :("}</p>
+                  </div>
                   <input
                     key={product.id}
                     id="selectQuantity"

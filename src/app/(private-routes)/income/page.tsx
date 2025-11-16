@@ -8,6 +8,11 @@ import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { API } from "@/api";
 
+interface bestDayType {
+  bestDay: string;
+  bestDayTotal: number;
+}
+
 export default function Income() {
   const [startDate, setStartDate] = useState<dayjs.Dayjs | null>(null);
   const [endDate, setEndDate] = useState<dayjs.Dayjs | null>(null);
@@ -16,8 +21,10 @@ export default function Income() {
   
   const [boxMessage, setBoxMessage] = useState<React.ReactNode>();
   const [entries, setEntries] = useState<string | null>(null);
-  const [currentEntriesTotal, setCurrentEntriesTotal] = useState<number | null>(null); // NOVO: Guarda o valor do mês atual como número
+  const [currentEntriesTotal, setCurrentEntriesTotal] = useState<number | null>(null);
   const [previousEntries, setPreviousEntries] = useState<number | null>(null);
+
+  const [bestDay, setBestDay] = useState<bestDayType | null>(null);
 
   useEffect(() => {
     handleGetMonthlyIndicator();
@@ -52,7 +59,7 @@ export default function Income() {
     } else if (currentTotal < previousTotal) {
         return <FaArrowDown color="red" scale={10} />;
     } else {
-        return null; // Iguais (ou você pode usar um ícone de "igual")
+        return null; // igaais (posso colocar um icone igual se quiser)
     }
 }
 
@@ -60,7 +67,9 @@ export default function Income() {
     try {
 
       const res = await API.get(`/income/monthly_comparison`);
-      const {currentMonthTotal, previousMonthTotal} = res.data;
+      const {currentMonthTotal, previousMonthTotal, bestDayInCurrentMonth} = res.data;
+
+      console.log(bestDayInCurrentMonth)
 
       const formattedTotal = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
@@ -81,6 +90,7 @@ export default function Income() {
       setEntries(formattedTotal);
       setCurrentEntriesTotal(currentMonthTotal);
       setPreviousEntries(previousMonthTotal);
+      setBestDay(bestDayInCurrentMonth)
     } catch (error) {
       console.error(error);
       alert("Erro ao buscar total faturado");
@@ -145,12 +155,12 @@ export default function Income() {
           </li>
           <li className={styles.infosBox}>
             <div className={styles.upSection}>
-              <h3>Entradas:</h3>
-              <h2>R$ 12.000,00</h2>
+              <h3>Melhor dia do mês:</h3>
+              <h2>{bestDay?.bestDay}</h2>
             </div>
             <div className={styles.bottomSection}>
               <p className={styles.subtitleBottomSection}>
-                Você teve o mesmo número de entradas no mês anterior!
+                Neste dia, você teve: <strong>{bestDay?.bestDayTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong> em entradas. Continue assim! :D
               </p>
             </div>
           </li>

@@ -2,12 +2,13 @@
 import TableComponent from "@/components/Table";
 import styles from "./page.module.css";
 import { FaListOl } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { API } from "@/api";
 
 import StockFormComponent from "@/components/StockForm";
 import { GridPaginationModel, GridRenderCellParams } from "@mui/x-data-grid";
 import EditModal from "@/components/EditModal";
+import { useSearchParams } from "next/navigation";
 
 interface Product {
   id: string;
@@ -22,6 +23,7 @@ interface Product {
 }
 
 export default function Stock() {
+  const search = useSearchParams();
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 10,
@@ -41,6 +43,9 @@ export default function Stock() {
   useEffect(() => {
     loadOverview();
     countCategories();
+    if(search.get("new_product") === "true"){
+      setIsOpen(true);
+    }
   }, []);
 
   async function countCategories() {
@@ -71,12 +76,12 @@ export default function Stock() {
     {
       field: "id",
       headerName: "ID",
-      width: 60,
+      width: 100,
     },
     {
       field: "name",
       headerName: "Nome",
-      width: 200,
+      width: 300,
     },
     {
       field: "category_name",
@@ -101,12 +106,12 @@ export default function Stock() {
     {
       field: "description",
       headerName: "Descrição",
-      width: 200,
+      width: 100,
     },
     {
       field: "actions",
       headerName: "Ações",
-      width: 200,
+      width: 300,
       renderCell: (params: GridRenderCellParams) => (
         <div
           className="btnsAction"
@@ -162,9 +167,9 @@ export default function Stock() {
     id: product.id,
     name: product.name,
     category: product.category,
-    quantity: product.quantity,
-    cost: product.cost,
-    price: product.price,
+    quantity: product.quantity + " un",
+    cost: "R$ " + product.cost.toFixed(2),
+    price: "R$ " + product.price.toFixed(2),
     description: product.description,
     category_name: product.category_name,
   }));

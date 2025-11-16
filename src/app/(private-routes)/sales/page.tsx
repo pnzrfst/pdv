@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import SalesFormComponent from "@/components/SalesForm";
 import { API } from "@/api";
 import { GridPaginationModel } from "@mui/x-data-grid";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Sales {
   id: string;
@@ -29,8 +29,12 @@ enum PaymentMethod {
 }
 
 export default function Sales() {
+  const search = useSearchParams();
   useEffect(() => {
     loadOverview();
+    if(search.get("new_sale") === "true"){
+      setIsOpen(true);
+    }
   }, []);
   const router = useRouter();
   //controlar o pagination
@@ -39,7 +43,6 @@ export default function Sales() {
     pageSize: 10,
   });
   const [rowCount, setRowCount] = useState<number>(1);
-  //controlar os
   const [totalEarnedToday, setTotalEarnedToday] = useState<number>(0);
   const [sales, setSales] = useState<Sales[]>([]);
   const [totalSales, setTotalSales] = useState<number>(0);
@@ -50,32 +53,32 @@ export default function Sales() {
     {
       field: "id",
       headerName: "ID",
-      width: 60,
+      width: 100,
     },
     {
       field: "date",
       headerName: "Data da venda",
-      width: 222,
+      width: 300,
     },
     {
       field: "total",
       headerName: "Valor total",
-      width: 222,
+      width: 200,
     },
     {
       field: "payment_method",
       headerName: "Método de pagamento",
-      width: 222,
+      width: 200,
     },
     {
       field: "client_id",
       headerName: "Nome do cliente",
-      width: 222,
+      width: 300,
     },
     {
       field: "products",
       headerName: "Produtos",
-      width: 222,
+      width: 300,
     },
   ];
 
