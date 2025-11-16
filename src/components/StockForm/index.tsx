@@ -181,7 +181,7 @@ export default function StockFormComponent({
               }}
               type="button"
             >
-             Selecionar
+             Cadastrar categoria
             </button>
             <div className="selectCategoryBox">
               <InputLabel id="ChooseCategory">Selecionar</InputLabel>

@@ -177,6 +177,7 @@
   text-align: center;
   color: var(--text-dark);
   padding: 1rem;
+  border: 1px solid #6c757d4b;
   border-radius: var(--radius);
   background-color: var(--box-bg);
   box-shadow: var(--shadow);
@@ -184,11 +185,11 @@
   transition: var(--transition);
 }
 
-.cardNextSteps h4{
+.cardNextSteps h4 {
   font-weight: lighter;
   color: var(--text-dark);
 }
-.cardNextSteps button{
+.cardNextSteps button {
   background-color: var(--primary-color);
   font-size: 1.5rem;
   width: 40px;

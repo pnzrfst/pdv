@@ -20,6 +20,14 @@ interface Sales {
   createdAt: Date;
 }
 
+enum PaymentMethod {
+  CARTAO_CREDITO = 'Cartão de crédito',
+  CARTAO_DEBITO = 'Cartão de débito',
+  DINHEIRO = 'Dinheiro',
+  FIADO = 'Fiado',
+  PIX = 'Pix'
+}
+
 export default function Sales() {
   useEffect(() => {
     loadOverview();
@@ -96,7 +104,7 @@ export default function Sales() {
       style: "currency",
       currency: "BRL",
     }).format(sale.total),
-    payment_method: sale.payment_method,
+    payment_method: PaymentMethod[sale.payment_method as keyof typeof PaymentMethod],
     client_id: sale.client_name,
     products: "Ver produtos",
   }));

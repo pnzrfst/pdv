@@ -79,8 +79,8 @@ export default function Stock() {
       width: 200,
     },
     {
-      field: "category_id",
-      headerName: "ID Categoria",
+      field: "category_name",
+      headerName: "Categoria",
       width: 200,
     },
     {
@@ -166,7 +166,7 @@ export default function Stock() {
     cost: product.cost,
     price: product.price,
     description: product.description,
-    category_id: product.category_name,
+    category_name: product.category_name,
   }));
 
   return (
